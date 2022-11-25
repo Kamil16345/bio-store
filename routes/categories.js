@@ -1,24 +1,36 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const app = express;
 const Joi = require('joi');
 const router = app.Router();
 
-const categories = [
-    {id:1, name:"eco food"},
-    {id:2, name:"gluten-free food"},
-    {id:3, name:"dietary supplements"},
-];
+const categorySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    }
+});
+const Category = mongoose.model('Category', categorySchema)
 
-router.get('/', (req, res)=>{
+// const categories = [
+//     {id:1, name:"eco food"},
+//     {id:2, name:"gluten-free food"},
+//     {id:3, name:"dietary supplements"},
+// ];
+
+router.get('/', async(req, res)=>{
+    const categories = await Category.find().sort('name');
     res.send(categories)
 })
-router.get('/:id', (req, res)=>{
-    const category = categories.find(c=>c.id === parseInt(req.params.id))
+router.get('/:id', async (req, res)=>{
+    const category = await Category.findById(req.params.id)
+    //const category = categories.find(c=>c.id === parseInt(req.params.id))
+    
     if(!category) return res.status(404).send("There is no category with such ID.")
 
     res.send(category)
 })
-router.post('/', (req, res)=>{
+router.post('/', async(req, res)=>{
 
     const { error } = validateCategory(req.body)
     if(error){
@@ -26,32 +38,27 @@ router.post('/', (req, res)=>{
         return;
     }
 
-    const category = {
-        id: categories.length+1,
-        name: req.body.name
-    };
+    let category = new Category({name: req.body.name});
+    category = await category.save();
 
-    categories.push(category);
     res.send(category);
 })
-router.put('/:id', (req,res)=>{
-    const category = categories.find(c => c.id === parseInt(req.params.id))
-    if(!category) return res.status(404).send("There is no category with such ID.")
-
+router.put('/:id', async(req,res)=>{
     const { error } = validateCategory(req.body);
     if(error){
         res.status(400).send(error.details[0].message)
     }
-    
-    category.name = req.body.name;
-    res.send(category)
-})
-router.delete('/:id', (req, res)=>{
-    const category = categories.find(c => c.id === parseInt(req.params.id))
+    //const category = categories.find(c => c.id === parseInt(req.params.id))
+    const category = await Category.findByIdAndUpdate(req.params.id, {name: req.body.name}, {new: true})
     if(!category) return res.status(404).send("There is no category with such ID.")
 
-    const index = categories.indexOf(category)
-    categories.splice(index, 1)
+    res.send(category)
+})
+router.delete('/:id', async(req, res)=>{
+    const category = await Category.findByIdAndRemove(req.params.id)
+    //const category = categories.find(c => c.id === parseInt(req.params.id))
+    if(!category) return res.status(404).send("There is no category with such ID.")
+
     res.send(category)
 })
 
