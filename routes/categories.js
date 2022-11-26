@@ -12,12 +12,6 @@ const categorySchema = new mongoose.Schema({
 });
 const Category = mongoose.model('Category', categorySchema)
 
-// const categories = [
-//     {id:1, name:"eco food"},
-//     {id:2, name:"gluten-free food"},
-//     {id:3, name:"dietary supplements"},
-// ];
-
 router.get('/', async(req, res)=>{
     const categories = await Category.find().sort('name');
     res.send(categories)
