@@ -1,16 +1,7 @@
+const {Category, validate} = require('../models/category')
 const express = require('express');
 const mongoose = require('mongoose')
-const app = express;
-const Joi = require('joi');
-const router = app.Router();
-
-const categorySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    }
-});
-const Category = mongoose.model('Category', categorySchema)
+const router = express.Router();
 
 router.get('/', async(req, res)=>{
     const categories = await Category.find().sort('name');
@@ -18,7 +9,6 @@ router.get('/', async(req, res)=>{
 })
 router.get('/:id', async (req, res)=>{
     const category = await Category.findById(req.params.id)
-    //const category = categories.find(c=>c.id === parseInt(req.params.id))
     
     if(!category) return res.status(404).send("There is no category with such ID.")
 
@@ -26,7 +16,7 @@ router.get('/:id', async (req, res)=>{
 })
 router.post('/', async(req, res)=>{
 
-    const { error } = validateCategory(req.body)
+    const { error } = validate(req.body)
     if(error){
         res.status(400).send(error.details[0].message);
         return;
@@ -38,11 +28,11 @@ router.post('/', async(req, res)=>{
     res.send(category);
 })
 router.put('/:id', async(req,res)=>{
-    const { error } = validateCategory(req.body);
+    const { error } = validate(req.body);
     if(error){
         res.status(400).send(error.details[0].message)
     }
-    //const category = categories.find(c => c.id === parseInt(req.params.id))
+
     const category = await Category.findByIdAndUpdate(req.params.id, {name: req.body.name}, {new: true})
     if(!category) return res.status(404).send("There is no category with such ID.")
 
@@ -50,16 +40,10 @@ router.put('/:id', async(req,res)=>{
 })
 router.delete('/:id', async(req, res)=>{
     const category = await Category.findByIdAndRemove(req.params.id)
-    //const category = categories.find(c => c.id === parseInt(req.params.id))
+
     if(!category) return res.status(404).send("There is no category with such ID.")
 
     res.send(category)
 })
 
-function validateCategory(category){
-    const schema = {
-        name: Joi.string().min(3).required()
-    }
-    return Joi.validate(category, schema)
-}
 module.exports = router;
