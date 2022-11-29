@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose')
 
-
 const categorySchema = new mongoose.Schema({
     name: {
         type: String,
@@ -18,4 +17,4 @@ function validateCategory(category){
 }
 exports.categorySchema = categorySchema;
 exports.Category = Category
-exports.validate = validateCategory;
+exports.validateCategory = validateCategory;

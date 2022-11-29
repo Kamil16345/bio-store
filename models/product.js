@@ -37,4 +37,4 @@ function validateProduct(product){
 }
 
 exports.Product = Product
-exports.validate = validateProduct;
+exports.validateProduct = validateProduct;

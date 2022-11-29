@@ -28,4 +28,4 @@ function validateCustomer(customer){
     return Joi.validate(customer, schema)
 }
 exports.Customer = Customer;
-exports.validate = validateCustomer;
+exports.validateCustomer = validateCustomer;
