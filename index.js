@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const categories = require('./routes/categories')
 const customers = require('./routes/customers')
+const products = require('./routes/products')
 
 mongoose.connect('mongodb://127.0.0.1/bio-store')
     .then(console.log('Successfully conntected to MongoDB'))
@@ -11,6 +12,7 @@ mongoose.connect('mongodb://127.0.0.1/bio-store')
 app.use(express.json());
 app.use('/api/categories', categories)
 app.use('/api/customers', customers)
+app.use('/api/products', products)
 
 app.get('/',(req, res)=>{
     res.send('Hello world')
