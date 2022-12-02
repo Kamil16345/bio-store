@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api/categories', categories)
 app.use('/api/customers', customers)
 app.use('/api/products', products)
-app.use('/api/shoppingCarts', shoppingCarts)
+app.use('/api', shoppingCarts)
 
 app.get('/',(req, res)=>{
     res.send('Hello world')

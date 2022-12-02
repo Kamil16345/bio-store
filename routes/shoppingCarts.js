@@ -7,47 +7,44 @@ const mongoose = require('mongoose')
 const express = require('express');
 const router = express.Router();
 
-router.get('/', async(req,res)=>{
-    const shoppingCarts = await ShoppingCart.find().sort('name')
-    res.send(shoppingCarts);
+router.get('/customers/', async(req,res)=>{
+    const shoppingCarts = await Customer.find()
+    res.send("shoppingCarts.shoppingCart");
 })
 
-router.post('/', async(req, res)=>{
+router.post('/:customerId/shoppingCarts', async(req, res)=>{
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
-    const customer = await Customer.findById(req.body.customerId)
+    const customer = await Customer.findById(req.params.customerId)
     if(!customer) return res.status(400).send('Invalid customer')
 
     const product = await Product.findById(req.body.productId)
     if(!product) return res.status(400).send('Invalid product')
 
-    let shoppingCart = new ShoppingCart({
-        customer:{
-            _id:customer._id,
-            name:customer.name,
-            phone: customer.phone
-        },
-        product:{
-            _id:product._id,
-            name:product.name,
-            numberInStock: product.numberInStock,
- 
-        },
-    })
-    shoppingCart = await shoppingCart.save()
+    // let shoppingCart = new ShoppingCart({
+    //     product:{
+    //         _id:product._id,
+    //         name:product.name,
+    //         numberInStock: product.numberInStock,
+    //     },
+    // })
 
+    customer.shoppingCart.products.push(product)
+
+    shoppingCart = await customer.save()
+    
     product.numberInStock--;
     product.save()
 
-    res.send(shoppingCart)
+    res.send(customer)
 })
-router.get('/:id', async (req, res)=>{
-    const shoppingCart = await ShoppingCart.findById(req.params.id)
+router.get('/:customerId/shoppingCart', async (req, res)=>{
+    const customer = await Customer.findById(req.params.customerId)
     
-    if(!shoppingCart) return res.status(404).send("There is no shoppingCart with such ID.")
+    if(!customer) return res.status(404).send("There is no customer with such ID.")
 
-    res.send(shoppingCart)
+    res.send(customer.shoppingCart)
 })
 router.put('/:id', async(req,res)=>{
     const { error } = validateShoppingCart(req.body);

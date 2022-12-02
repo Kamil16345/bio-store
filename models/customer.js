@@ -1,5 +1,6 @@
 const Joi = require('joi');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { ShoppingCartSchema } = require('./shoppingCart');
 
 const customerSchema = new mongoose.Schema({
     name: {
@@ -14,6 +15,12 @@ const customerSchema = new mongoose.Schema({
     phone:{
         type: Number,
         required: false
+    },
+    shoppingCart:{
+        type: new mongoose.Schema({
+            products: [ShoppingCartSchema]
+        }),
+        required: false
     }
 })
 
@@ -23,7 +30,8 @@ function validateCustomer(customer){
     const schema = {
         isGold: Joi.boolean(),
         name: Joi.string().min(3).required(),
-        phone: Joi.number()
+        phone: Joi.number(),
+        shoppingCart:Joi.object()
     }
     return Joi.validate(customer, schema)
 }

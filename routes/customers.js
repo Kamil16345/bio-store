@@ -1,6 +1,8 @@
-const {Customer, validate} = require('../models/customer')
+const {Customer, validateCustomer} = require('../models/customer')
+const {Product} = require('../models/product')
 const mongoose = require('mongoose')
 const express = require('express');
+const { ShoppingCart } = require('../models/shoppingCart');
 const router = express.Router();
 
 router.get('/', async(req,res)=>{
@@ -9,13 +11,16 @@ router.get('/', async(req,res)=>{
 })
 
 router.post('/', async(req, res)=>{
-    const { error } = validate(req.body)
+    const { error } = validateCustomer(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
     let customer = new Customer({
         isGold:req.body.isGold,
         name: req.body.name,
-        phone: req.body.phone
+        phone: req.body.phone,
+        shoppingCart: {
+            products: req.body.shoppingCart.products
+            }
     })
     customer = await customer.save()
     res.send(customer)
@@ -28,7 +33,7 @@ router.get('/:id', async (req, res)=>{
     res.send(customer)
 })
 router.put('/:id', async(req,res)=>{
-    const { error } = validate(req.body);
+    const { error } = validateCustomer(req.body);
     if(error){
         res.status(400).send(error.details[0].message)
     }
