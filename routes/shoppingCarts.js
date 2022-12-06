@@ -7,9 +7,10 @@ const mongoose = require('mongoose')
 const express = require('express');
 const router = express.Router();
 
-router.get('/customers/', async(req,res)=>{
-    const shoppingCarts = await Customer.find()
-    res.send("shoppingCarts.shoppingCart");
+router.get('/shoppingCarts', async(req,res)=>{
+    const shoppingCarts = await Customer.find().select('shoppingCart -_id')
+    res.send(shoppingCarts);
+    
 })
 
 router.post('/:customerId/shoppingCarts', async(req, res)=>{
@@ -46,7 +47,14 @@ router.get('/:customerId/shoppingCart', async (req, res)=>{
 
     res.send(customer.shoppingCart)
 })
-router.put('/:id', async(req,res)=>{
+router.put('/:customerId/shoppingCart', async(req,res)=>{
+    //TODO: 
+    //*restructure shoppingCart structure - product will be array with properties: 
+                                          //productId
+                                          //name
+                                          //amount
+                                          //price(amount*productPrice)
+    //finish updating put method(you want to update amount)
     const { error } = validateShoppingCart(req.body);
     if(error){
         res.status(400).send(error.details[0].message)
@@ -57,8 +65,7 @@ router.put('/:id', async(req,res)=>{
     const product = await Product.findById(req.body.productId)
     if(!product) return res.status(400).send('Invalid product')
     
-    const shoppingCart = await ShoppingCart.findByIdAndUpdate(req.params.id, {
-        customerId:req.body.customerId,
+    const shoppingCart = await ShoppingCart.findByIdAndUpdate(req.params.customerId, {
         productId:req.body.productId
     }, 
     {
@@ -68,12 +75,20 @@ router.put('/:id', async(req,res)=>{
 
     res.send(shoppingCart)
 })
-router.delete('/:id', async(req, res)=>{
-    const shoppingCart = await ShoppingCart.findByIdAndRemove(req.params.id)
-    if(!shoppingCart) return res.status(404).send("There is no shoppingCart with such ID.")
+router.delete('/:customerId/shoppingCart', async(req, res)=>{
+    const customer = await Customer.findById(req.params.customerId)
+    if(!customer) return res.status(404).send("There is no customer with such ID.")
+    
+    const shoppingCart = await customer.shoppingCart.products.splice(req.body.productIndex, 1)
+    //const product = await ShoppingCart.findById(req.body.productId)
 
-    res.send(shoppingCart)
+    //if(!product) return res.status(404).send('There is no such a product.')
+    res.send(customer)
 })
 
 module.exports = router
 
+
+//pobierasz użytkownika
+//pobierasz koszyk
+//usuwasz produkt

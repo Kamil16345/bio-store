@@ -5,6 +5,8 @@ const categories = require('./routes/categories')
 const customers = require('./routes/customers')
 const products = require('./routes/products')
 const shoppingCarts = require('./routes/shoppingCarts')
+const users = require('./routes/users')
+const auth = require('./routes/auth')
 
 mongoose.connect('mongodb://127.0.0.1/bio-store')
     .then(console.log('Successfully conntected to MongoDB'))
@@ -15,6 +17,8 @@ app.use('/api/categories', categories)
 app.use('/api/customers', customers)
 app.use('/api/products', products)
 app.use('/api', shoppingCarts)
+app.use('/api/users', users)
+app.use('/api/auth', auth)
 
 app.get('/',(req, res)=>{
     res.send('Hello world')
