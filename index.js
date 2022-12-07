@@ -1,3 +1,4 @@
+const config = require('config')
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
@@ -8,8 +9,13 @@ const shoppingCarts = require('./routes/shoppingCarts')
 const users = require('./routes/users')
 const auth = require('./routes/auth')
 
+if(!config.get('jwtPrivateKey')){
+    console.error('FATAL ERROR: jwtPrivateKey is not defined.');
+    process.exit(1);
+}
+
 mongoose.connect('mongodb://127.0.0.1/bio-store')
-    .then(console.log('Successfully conntected to MongoDB'))
+    .then(console.log('Successfully connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err))
 
 app.use(express.json());
