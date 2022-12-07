@@ -1,3 +1,5 @@
+const auth = require('../middleware/auth')
+const admin = require('../middleware/admin')
 const {Category, validateCategory} = require('../models/category')
 const express = require('express');
 const mongoose = require('mongoose')
@@ -14,9 +16,7 @@ router.get('/:id', async (req, res)=>{
 
     res.send(category)
 })
-router.post('/', async(req, res)=>{
-
-
+router.post('/', auth, async(req, res)=>{
 
     const { error } = validateCategory(req.body)
     if(error){
@@ -40,7 +40,7 @@ router.put('/:id', async(req,res)=>{
 
     res.send(category)
 })
-router.delete('/:id', async(req, res)=>{
+router.delete('/:id', [auth, admin], async(req, res)=>{
     const category = await Category.findByIdAndRemove(req.params.id)
 
     if(!category) return res.status(404).send("There is no category with such ID.")

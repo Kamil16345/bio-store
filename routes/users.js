@@ -1,3 +1,4 @@
+const auth = require('../middleware/auth')
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const express = require('express')
@@ -12,11 +13,9 @@ router.get('/', async (req, res)=>{
     res.send(users)
 })
 
-router.get('/:userId', async(req, res)=>{
-    const user = await User.findById(req.params.userId);
-    if(!user) return res.status(404).send('There is no such a user.')
-
-    res.send(user)
+router.get('/me', auth, async(req, res)=>{
+    const user = await User.findById(req.user._id).select('-password')
+    res.send(user);
 })
 
 router.post('/', async(req, res)=>{
