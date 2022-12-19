@@ -28,5 +28,8 @@
     "url": "https://github.com/Kamil16345/movies-api/issues"
   },
   "homepage": "https://github.com/Kamil16345/movies-api#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
 }
