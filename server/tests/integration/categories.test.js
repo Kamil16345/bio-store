@@ -38,18 +38,15 @@ describe('/api/categories', ()=>{
         })
     })
     describe('POST /', ()=>{
-        // it('should return a valid category object if it is correct', async()=>{
-        //     category = new Category({name: 'category11'})
-        //     await category.save()
-
-        //     const res = await request(server).post('/api/categories')
-        //     expect(res.status).toBe(200);
-        //     expect(res.body).toHaveProperty('name', category.name)
-        // })
         it("should return 401 if client isn't logged in", async()=>{
            const res = await request(server).post('/api/categories').send({name: 'category10'})
 
            expect(res.status).toBe(401)
         })
+        it("should return 400 if category is invald", async()=>{
+            const res = await request(server).post('/api/categories').send({name: 'category10'})
+ 
+            expect(res.status).toBe(401)
+         })
     })
 })
