@@ -15,21 +15,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kamil16345/movies-api.git"
+    "url": "git+https://github.com/Kamil16345/bio-store.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kamil16345/movies-api/issues"
+    "url": "https://github.com/Kamil16345/bio-store/issues"
   },
-  "homepage": "https://github.com/Kamil16345/movies-api#readme",
+  "homepage": "https://github.com/Kamil16345/bio-store#readme",
   "description": "",
   "devDependencies": {
-    "jest": "^29.3.1"
+    "jest": "^29.3.1",
+    "supertest": "^6.3.3"
   }
 }

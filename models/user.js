@@ -41,3 +41,4 @@ function validateUser(user){
 }
 exports.User = User
 exports.validateUser = validateUser
+//exports.generateAuthToken = this.generateAuthToken

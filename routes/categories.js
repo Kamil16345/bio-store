@@ -1,3 +1,4 @@
+const validateObjectId = require('../middleware/validateObjectId')
 const asyncMiddleware = require('../middleware/async')
 const auth = require('../middleware/auth')
 const admin = require('../middleware/admin')
@@ -13,8 +14,8 @@ router.get('/', asyncMiddleware(async(req, res, next)=>{
 
 }));
 
-router.get('/:id', async (req, res)=>{
-    
+router.get('/:id', validateObjectId, async (req, res)=>{
+
     const category = await Category.findById(req.params.id)
     if(!category) return res.status(404).send("There is no category with such ID.")
     res.send(category)

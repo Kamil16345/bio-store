@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-require('./startup/logging')
+require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')
@@ -10,4 +10,7 @@ app.get('/',(req, res)=>{
 })
 
 const port = process.env.PORT || 3000
-app.listen(port, ()=>console.log(`App is starting on port: ${port}`))
+
+const server = app.listen(port, ()=>console.log(`App is starting on port: ${port}`))
+
+module.exports=server

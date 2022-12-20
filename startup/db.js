@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
+const config = require('config')
 
-module.exports = function(db){
-    mongoose.connect('mongodb://127.0.0.1/bio-store')
-    .then(console.log('Successfully connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err)
+module.exports = function(){
+    const db = config.get('db')
+    mongoose.connect(db)
+    .then(console.log(`Successfully connected to ${db}`))
+    .catch(err => console.error(`Could not connect to ${db}`, err)
     )
 
 }
