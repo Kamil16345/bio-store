@@ -1,9 +1,19 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')
+
+var corsOptions = {
+    origin: "http://localhost:3001",
+    headers:{
+        "Access-Control-Allow-Origin":"*"
+    }
+};
+
+app.use(cors(corsOptions))
 
 app.get('/',(req, res)=>{
     res.send('Hello world')

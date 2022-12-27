@@ -1,49 +1,49 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 
-export default class AuthenticateUser extends Component {
+export default class AddTutorial extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
+    this.onChangeLogin = this.onChangeLogin.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.sendCredentials = this.sendCredentials.bind(this);
+    //this.newTutorial = this.newTutorial.bind(this);
 
     this.state = {
       id: null,
-      title: "",
-      description: "", 
-      published: false,
+      login: "",
+      password: "", 
+      //published: false,
 
       submitted: false
     };
   }
 
-  onChangeTitle(e) {
+  onChangeLogin(e) {
     this.setState({
-      title: e.target.value
+      login: e.target.value
     });
   }
 
-  onChangeDescription(e) {
+  onChangePassword(e) {
     this.setState({
-      description: e.target.value
+      password: e.target.value
     });
   }
 
-  saveTutorial() {
+  sendCredentials() {
     var data = {
-      title: this.state.title,
-      description: this.state.description
+      login: this.state.login,
+      password: this.state.password
     };
 
     TutorialDataService.create(data)
       .then(response => {
         this.setState({
-          id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-          published: response.data.published,
+          //id: response.data.id,
+          login: response.data.login,
+          password: response.data.password,
+          //published: response.data.published,
 
           submitted: true
         });
@@ -52,13 +52,14 @@ export default class AuthenticateUser extends Component {
       .catch(e => {
         console.log(e);
       });
+
   }
 
   newTutorial() {
     this.setState({
       id: null,
-      title: "",
-      description: "",
+      login: "",
+      password: "",
       published: false,
 
       submitted: false
@@ -78,15 +79,15 @@ export default class AuthenticateUser extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Email</label>
+              <label htmlFor="login">Login</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                id="email"
+                id="login"
                 required
-                value={this.state.email}
-                onChange={this.onChangeTitle}
-                name="email"
+                value={this.state.login}
+                onChange={this.onChangeLogin}
+                name="login"
               />
             </div>
 
@@ -98,12 +99,11 @@ export default class AuthenticateUser extends Component {
                 id="password"
                 required
                 value={this.state.password}
-                onChange={this.onChangeDescription}
+                onChange={this.onChangePassword}
                 name="password"
               />
             </div>
-
-            <button onClick={this.saveTutorial} className="btn btn-success">
+            <button onClick={this.sendCredentials} className="btn btn-success">
               Submit
             </button>
           </div>

@@ -7,9 +7,12 @@ const bcrypt = require('bcrypt')
 const { User } = require('../models/user')
 const Joi = require("joi");
 const jwt = require('jsonwebtoken')
+const fs = require('fs')
 
+//fs.readFile(__dirname+'../../client/src/App')
 
 router.get('/', async (req, res)=>{
+    
     const users = await User.find()
     res.send(users)
 })
