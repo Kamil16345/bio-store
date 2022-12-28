@@ -8,9 +8,10 @@ const { User } = require('../models/user')
 const Joi = require("joi");
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
+const cors = require("cors");
 
 //fs.readFile(__dirname+'../../client/src/App')
-
+router.options('*', cors())
 router.get('/', async (req, res)=>{
     
     const users = await User.find()
@@ -20,11 +21,10 @@ router.get('/', async (req, res)=>{
 router.get('/:userId', async(req, res)=>{
     const user = await User.findById(req.params.userId);
     if(!user) return res.status(404).send('There is no such a user.')
-
     res.send(user)
 })
 
-router.post('/', async(req, res)=>{
+router.post('/', cors(), async(req, res)=>{
     const { error } = validate(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 

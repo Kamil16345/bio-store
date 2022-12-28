@@ -4,14 +4,14 @@ import TutorialDataService from "../services/tutorial.service";
 export default class AddTutorial extends Component {
   constructor(props) {
     super(props);
-    this.onChangeLogin = this.onChangeLogin.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.sendCredentials = this.sendCredentials.bind(this);
     //this.newTutorial = this.newTutorial.bind(this);
 
     this.state = {
       id: null,
-      login: "",
+      email: "",
       password: "", 
       //published: false,
 
@@ -19,9 +19,9 @@ export default class AddTutorial extends Component {
     };
   }
 
-  onChangeLogin(e) {
+  onChangeEmail(e) {
     this.setState({
-      login: e.target.value
+      email: e.target.value
     });
   }
 
@@ -33,7 +33,7 @@ export default class AddTutorial extends Component {
 
   sendCredentials() {
     var data = {
-      login: this.state.login,
+      email: this.state.email,
       password: this.state.password
     };
 
@@ -41,7 +41,7 @@ export default class AddTutorial extends Component {
       .then(response => {
         this.setState({
           //id: response.data.id,
-          login: response.data.login,
+          email: response.data.email,
           password: response.data.password,
           //published: response.data.published,
 
@@ -58,7 +58,7 @@ export default class AddTutorial extends Component {
   newTutorial() {
     this.setState({
       id: null,
-      login: "",
+      email: "",
       password: "",
       published: false,
 
@@ -79,15 +79,15 @@ export default class AddTutorial extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="login">Login</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
                 className="form-control"
-                id="login"
+                id="email"
                 required
-                value={this.state.login}
-                onChange={this.onChangeLogin}
-                name="login"
+                value={this.state.email}
+                onChange={this.onChangeEmail}
+                name="email"
               />
             </div>
 

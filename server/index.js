@@ -8,7 +8,7 @@ require('./startup/config')
 
 var corsOptions = {
     origin: "http://localhost:3001",
-    headers:{
+    header:{
         "Access-Control-Allow-Origin":"*"
     }
 };
