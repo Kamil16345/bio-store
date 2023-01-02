@@ -1,35 +1,23 @@
-import React, { Component } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import {Routes, Route} from 'react-router-dom'
+import {Home} from './components/Home'
+import {AuthenticateUser} from './components/authenticate-user.component'
+import {Navbar} from './components/Navbar'
+import {UserPanel} from './components/user-panel'
+import { SignUpUser } from './components/SignUpUser'
 
-import AuthenticateUser from "./components/authenticate-user";
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/authenticate-user"} className="navbar-brand">
-            bioMe
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/authenticate-user"} className="nav-link">
-                Sign In
-              </Link>
-            </li>
-          </div>
-        </nav>
-
-        <div className="container mt-3">
-          <Routes>
-            <Route path="/authenticate-user" element={<AuthenticateUser/>} />
-          </Routes>
-        </div>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <>
+    <Navbar />
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='authenticate' element={<AuthenticateUser/>} />
+        <Route path='user-panel' element={<UserPanel/>} />
+        <Route path='signUp' element={<SignUpUser/>} />
+        
+      </Routes>
+    </>
+  );
 }
 
 export default App;

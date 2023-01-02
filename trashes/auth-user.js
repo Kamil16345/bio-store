@@ -1,27 +1,28 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 
-export default class AddTutorial extends Component {
+export default class AuthenticateUser extends Component {
+
   constructor(props) {
     super(props);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
+    this.onChangeLogin = this.onChangeLogin.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.sendCredentials = this.sendCredentials.bind(this);
+    //this.saveTutorial = this.saveTutorial.bind(this);
     //this.newTutorial = this.newTutorial.bind(this);
 
     this.state = {
       id: null,
-      email: "",
+      login: "",
       password: "", 
       //published: false,
 
       submitted: false
     };
   }
-
-  onChangeEmail(e) {
+  
+  onChangeLogin(e) {
     this.setState({
-      email: e.target.value
+      login: e.target.value
     });
   }
 
@@ -32,8 +33,9 @@ export default class AddTutorial extends Component {
   }
 
   sendCredentials() {
+    console.log(this.state)
     var data = {
-      email: this.state.email,
+      login: this.state.login,
       password: this.state.password
     };
 
@@ -41,7 +43,7 @@ export default class AddTutorial extends Component {
       .then(response => {
         this.setState({
           //id: response.data.id,
-          email: response.data.email,
+          login: response.data.login,
           password: response.data.password,
           //published: response.data.published,
 
@@ -52,19 +54,18 @@ export default class AddTutorial extends Component {
       .catch(e => {
         console.log(e);
       });
-
   }
 
-  newTutorial() {
-    this.setState({
-      id: null,
-      email: "",
-      password: "",
-      published: false,
+  // newSubmit() {
+  //   this.setState({
+  //     id: null,
+  //     login: "",
+  //     password: "",
+  //     //published: false,
 
-      submitted: false
-    });
-  }
+  //     submitted: false
+  //   });
+  // }
 
   render() {
     return (
@@ -72,22 +73,22 @@ export default class AddTutorial extends Component {
         {this.state.submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
+            {/* <button className="btn btn-success" onClick={this.newTutorial}>
               Add
-            </button>
+            </button> */}
           </div>
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="login">Login</label>
               <input
                 type="text"
                 className="form-control"
-                id="email"
+                id="login"
                 required
-                value={this.state.email}
-                onChange={this.onChangeEmail}
-                name="email"
+                value={this.state.login}
+                onChange={this.onChangeLogin}
+                name="login"
               />
             </div>
 
@@ -104,11 +105,14 @@ export default class AddTutorial extends Component {
               />
             </div>
             <button onClick={this.sendCredentials} className="btn btn-success">
-              Submit
+              Sign In
             </button>
           </div>
         )}
       </div>
+      
     );
   }
 }
+
+

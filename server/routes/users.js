@@ -7,7 +7,9 @@ const mongoose = require('mongoose')
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
 const { User, validateUser } = require('../models/user')
+const cors = require('cors')
 
+router.options('*', cors())
 router.get('/', async (req, res)=>{
     const users = await User.find()
     res.send(users)
@@ -18,7 +20,7 @@ router.get('/me', auth, async(req, res)=>{
     res.send(user);
 })
 
-router.post('/', async(req, res)=>{
+router.post('/', cors(), async(req, res)=>{
     const { error } = validateUser(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 
