@@ -1,8 +1,8 @@
 import {Routes, Route} from 'react-router-dom'
 import {Home} from './components/Home'
-import {AuthenticateUser} from './components/authenticate-user.component'
+import {SignInUser} from './components/SignInUser'
 import {Navbar} from './components/Navbar'
-import {UserPanel} from './components/user-panel'
+import {UserPanel} from './components/userPanel'
 import { SignUpUser } from './components/SignUpUser'
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
     <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='authenticate' element={<AuthenticateUser/>} />
-        <Route path='user-panel' element={<UserPanel/>} />
+        <Route path='authenticate' element={<SignInUser/>} />
+        <Route path='userPanel' element={<UserPanel/>} />
         <Route path='signUp' element={<SignUpUser/>} />
         
       </Routes>

@@ -6,7 +6,7 @@ export const Home=()=>{
     return(
         <>
             <div>Home Page</div>
-            <button onClick={()=>navigate('authenticate')}>AuthenticateUser</button>
+            <button onClick={()=>navigate('authenticate')}>Authenticate User</button>
         </>
     )
 }

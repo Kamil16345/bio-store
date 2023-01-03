@@ -1,133 +1,88 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import SignUpUserServices from "../services/signUpUser"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import SignUpUserServices from "../services/signUpUserServices"
 
-export class SignUpUser extends Component{
-    constructor(props){
-        super(props);
-        this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangeName = this.onChangeName.bind(this)
-        this.onChangePassword =this.onChangePassword.bind(this)
-        this.saveUser = this.saveUser.bind(this)
-
-        this.state={
-            email:"",
-            name:"",
-            password:"",
-
-            submitted:false
-        };
+const submitted=false;
+export const SignUpUser = () => {
+    
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
+    const navigate = useNavigate()
+    
+    function onChangeEmail(event){
+        setEmail(event.target.value)
     }
 
-    onChangeEmail(e){
-        this.setState({
-            email:e.target.value
-        })
+    function onChangeName(event){
+        setName(event.target.value)
     }
-    onChangeName(e){
-        this.setState({
-            name: e.target.value
-        })
+    
+    function onChangePassword(event){
+        setPassword(event.target.value)
     }
-
-    onChangePassword(e){
-        this.setState({
-            password: e.target.value
-        })
-    }
-
-    saveUser(){
-        console.log(this.state)
+    
+    function saveUser(){
         var data={
-            email: this.state.email,
-            name: this.state.name,
-            password: this.state.password
+            email: email,
+            name: name,
+            password: password
         };
         
-
         SignUpUserServices.create(data)
-            .then(response => {
-                this.setState({
-                    email: response.data.email,
-                    name: response.data.name,
-                    password: response.data.password,
-
-                    submitted: true
-                })
-                console.log(response.data)
+            .then(response => ({
                 
-            })
-            .catch(e => {
+                email: email,
+                name:name,
+                password: password,
+                submitted: true
+            }))
+            .catch(e =>{
                 console.log(e);
-            });
-
+            }); 
+        navigate('/userPanel', {state: {email:email, name:name} })
     }
-    newAuthentication(){
-        this.setState({
-            email:"",
-            name:"",
-            password:"",
-
-            submitted: false
-        })
-    }
-
-    render(){
-        var user = this.state.email
-        return(
-            <div className="submit-form">
-                {this.state.submitted ? (
-                    <div>
-                        <h4>Welcome {user}</h4>
-                        <button>
-                            Some button
-                        </button>
-                    </div>
-                ):(
-                    <div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="text"
-                                className="form-control"
-                                id="email"
-                                required
-                                value={this.state.email}
-                                onChange={this.onChangeEmail}
-                                name="email"
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="name">Name</label>
-                            <input 
-                                type="text"
-                                className="form-control"
-                                id="name"
-                                required
-                                value={this.state.name}
-                                onChange={this.onChangeName}
-                                name="name"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input 
-                                type="password"
-                                className="form-control"
-                                id="password"
-                                required
-                                value={this.state.password}
-                                onChange={this.onChangePassword}
-                                name="password"
-                            />
-                            <button onClick={this.saveUser} className="btn btn-success">
-                                Sign Up
-                            </button>
-                        </div>
-                    </div>
-                )}
-            </div>
-        )
-    }
+    return(
+        <div>
+               <div className="form-group">
+                   <label htmlFor="email">Email</label>
+                   <input 
+                       type="text"
+                       className="form-control"
+                       id="email"
+                       required
+                       value= {email}
+                       onChange={onChangeEmail}
+                       name="email"
+                   />
+               </div>
+               <div className="form-group">
+                   <label htmlFor="name">Name</label>
+                   <input 
+                       type="text"
+                       className="form-control"
+                       id="name"
+                       required
+                       value= {name}
+                       onChange={onChangeName}
+                       name="name"
+                   />
+               </div>
+               <div className="form-group">
+                   <label htmlFor="password">Password</label>
+                   <input 
+                       type="password"
+                       className="form-control"
+                       id="password"
+                       required
+                       value={password}
+                       onChange={onChangePassword}
+                       name="password"
+                   />
+                   <button onClick={()=>saveUser()} className="btn btn-success">
+                       Sign Up
+                   </button>
+               </div>
+           </div>
+   )
 }
