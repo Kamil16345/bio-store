@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpUserServices from "../services/signUpUserServices"
+import {useAuth} from "./auth"
 
 const submitted=false;
 export const SignUpUser = () => {
@@ -8,6 +9,7 @@ export const SignUpUser = () => {
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
+    const auth=useAuth()
     const navigate = useNavigate()
     
     return(
@@ -74,6 +76,7 @@ export const SignUpUser = () => {
         
         SignUpUserServices.create(data)
             .then(response => (
+                auth.login(email),
                 navigate(`/userPanel/${email}`, {
                     state: {
                         email:response.data.email, 

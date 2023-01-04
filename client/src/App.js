@@ -5,10 +5,12 @@ import {Navbar} from './components/Navbar'
 import {UserPanel} from './components/userPanel'
 import { SignUpUser } from './components/SignUpUser'
 import { NoMatch } from './components/NoMatch'
+import {AuthProvider} from "./components/auth"
+import {Logout} from "./components/Logout"
 
 function App() {
   return (
-    <>
+    <AuthProvider>
     <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
@@ -16,9 +18,10 @@ function App() {
         <Route path='authenticate' element={<SignInUser/>} />
         <Route path='userPanel/:email' element={<UserPanel/>} />
         <Route path='signUp' element={<SignUpUser/>} />
+        <Route path='logout' element={<Logout/>} />
         
       </Routes>
-    </>
+    </AuthProvider>
   );
 }
 

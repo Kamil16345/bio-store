@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthenticateDataService from "../services/signInUserServices"
+import {useAuth} from "./auth"
 
 const submitted=false;
 export const SignInUser = () => {
@@ -9,6 +10,7 @@ export const SignInUser = () => {
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const auth = useAuth()
     return(
         <div className="submit-form">
             {submitted ? (
@@ -80,6 +82,7 @@ export const SignInUser = () => {
         
             AuthenticateDataService.getUser(data.email)
             .then(response => (
+                auth.login(email),
                 navigate(`/userPanel/${email}`, {
                     state: {
                         email:response.data.email, 
