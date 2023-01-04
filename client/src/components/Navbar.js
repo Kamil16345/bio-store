@@ -1,7 +1,9 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import { useAuth } from './auth'
 
 export const Navbar = () => {
+  const auth = useAuth()
   return (
     <nav>
         <NavLink to='/'>Home</NavLink>

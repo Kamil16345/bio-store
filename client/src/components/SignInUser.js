@@ -6,6 +6,7 @@ const submitted=false;
 export const SignInUser = () => {
     
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     return(
@@ -65,8 +66,8 @@ export const SignInUser = () => {
             email: email,
             password: password
         };
-        console.log()
-        AuthenticateDataService.create(data)
+
+         AuthenticateDataService.create(data)
             .then(response => ({
                 
                 email: email,
@@ -75,8 +76,20 @@ export const SignInUser = () => {
             }))
             .catch(e =>{
                 console.log(e);
-            }); 
-        navigate('/userPanel')
+            });
+        
+            AuthenticateDataService.getUser(data.email)
+            .then(response => (
+                navigate(`/userPanel/${email}`, {
+                    state: {
+                        email:response.data.email, 
+                        name:response.data.name
+                    }})
+        ))
+            .catch(e=> {
+                console.log(e)
+            })
+        
     }
 
 }

@@ -18,9 +18,13 @@ router.get('/', async (req, res)=>{
     res.send(users)
 })
 
-router.get('/:userId', async(req, res)=>{
-    const user = await User.findById(req.params.userId);
+router.get('/:email', cors(), async(req, res)=>{
+    //const user = await User.findById(req.params.userId);
+    //console.log(req.params.email)
+    const user = await User.findOne({email:req.params.email})
     if(!user) return res.status(404).send('There is no such a user.')
+    console.log("Here' user data")
+    console.log(user)
     res.send(user)
 })
 
