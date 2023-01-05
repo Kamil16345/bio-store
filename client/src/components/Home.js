@@ -6,7 +6,6 @@ export const Home=()=>{
     return(
         <>
             <div>Welcome in bio-me store!</div>
-            
         </>
     )
 }

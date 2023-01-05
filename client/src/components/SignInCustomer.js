@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthenticateDataService from "../services/signInUserServices"
+import AuthenticateDataService from "../services/signInCustomerServices"
 import {useAuth} from "./auth"
 
 const submitted=false;
-export const SignInUser = () => {
+export const SignInCustomer = () => {
     
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
@@ -46,7 +46,7 @@ export const SignInUser = () => {
                             onChange={onChangePassword}
                             name="password"
                         />
-                        <button onClick={()=>saveUser()} className="btn btn-success">
+                        <button onClick={()=>saveCustomer()} className="btn btn-success">
                             Sign In
                         </button>
                     </div>
@@ -62,8 +62,12 @@ export const SignInUser = () => {
     function onChangePassword(event){
         setPassword(event.target.value)
     }
+
+    function handleError(e){
+        console.log(e.message)
+    }
     
-    function saveUser(){
+    function saveCustomer(){
         var data={
             email: email,
             password: password
@@ -80,19 +84,17 @@ export const SignInUser = () => {
                 console.log(e);
             });
         
-            AuthenticateDataService.getUser(data.email)
+            AuthenticateDataService.getCustomer(data.email)
             .then(response => (
                 auth.login(email),
-                navigate(`/userPanel/${email}`, {
+                navigate(`/customerPanel/${email}`, {
                     state: {
                         email:response.data.email, 
                         name:response.data.name
-                    }})
+                }})
         ))
             .catch(e=> {
                 console.log(e)
             })
-        
     }
-
 }

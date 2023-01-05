@@ -18,9 +18,8 @@ export const Navbar = () => {
             </>
         )}
         {auth.email && (
-            
             <>
-              <NavLink to='userPanel'>User Panel</NavLink>
+              <NavLink to='customerPanel'>Customer Panel</NavLink>
               <NavLink to='/logout'>Sign Out</NavLink>
             </>
         )}
