@@ -1,13 +1,10 @@
 import React from 'react'
-import {NavLink, useLocation} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import { useAuth } from './auth'
 
 
 export const Navbar = () => {
   const auth = useAuth()
-
-    //const {state}=useLocation()
-    //const {name}=state
   return (
     <nav>
         <NavLink to='/'>Home</NavLink>
@@ -20,7 +17,8 @@ export const Navbar = () => {
         {auth.email && (
             <>
               <NavLink to='customerPanel'>Customer Panel</NavLink>
-              <NavLink to='/logout'>Sign Out</NavLink>
+              <NavLink to='shoppingCart' id="shoppingCart">ShoppingCart</NavLink>
+              <NavLink to='/logout' id="logoutButton">Logout</NavLink>
             </>
         )}
         

@@ -8,7 +8,6 @@ const cors = require("cors")
 
 router.options('*', cors())
 router.get('/', async(req,res)=>{
-    console.log("I'M here!!!!!!1")
     const customers = await Customer.find()
     console.log(customer)
     res.send(customers);

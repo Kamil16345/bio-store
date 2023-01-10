@@ -31,3 +31,9 @@ nav a{
 #navbarUsername{
   text-align: left;
 }
+a#logoutButton{
+  float:right
+}
+a#shoppingCart{
+  float: right;
+}

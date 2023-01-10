@@ -7,7 +7,7 @@ const submitted=false;
 export const SignInCustomer = () => {
     
     const [email, setEmail] = useState('')
-    const [name, setName] = useState('')
+    const [id, setId] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     const auth = useAuth()
@@ -62,39 +62,31 @@ export const SignInCustomer = () => {
     function onChangePassword(event){
         setPassword(event.target.value)
     }
-
-    function handleError(e){
-        console.log(e.message)
-    }
     
     function saveCustomer(){
-        var data={
+        let data={
+            id:id,
             email: email,
             password: password
         };
 
-         AuthenticateDataService.create(data)
-            .then(response => ({
-                
-                email: email,
-                password: password,
-                submitted: true
-            }))
-            .catch(e =>{
-                console.log(e);
-            });
-        
-            AuthenticateDataService.getCustomer(data.email)
-            .then(response => (
-                auth.login(email),
-                navigate(`/customerPanel/${email}`, {
-                    state: {
-                        email:response.data.email, 
-                        name:response.data.name
-                }})
+        // localStorage.setItem("userData", data)
+        // console.log(localStorage)
+
+        AuthenticateDataService.getCustomer(data.email)
+        .then(response => (
+            auth.login(email),
+            navigate(`/customerPanel/${email}`, {
+                state: {
+                    email:response.data.email, 
+                    name:response.data.name,
+                    id: response.data._id
+                }
+            }),
+            localStorage.setItem("userId", response.data._id)
         ))
-            .catch(e=> {
-                console.log(e)
-            })
+        .catch(e=> {
+            console.log(e)
+        })
     }
 }

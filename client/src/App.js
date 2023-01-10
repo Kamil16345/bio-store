@@ -7,6 +7,7 @@ import { SignUpCustomer } from './components/SignUpCustomer'
 import { NoMatch } from './components/NoMatch'
 import {AuthProvider} from "./components/auth"
 import {Logout} from "./components/Logout"
+import { ShoppingCart } from './components/ShoppingCart'
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='*' element={<NoMatch/>} />
         <Route path='authenticate' element={<SignInCustomer/>} />
-        <Route path='customerPanel/:email' element={<CustomerPanel/>} />
+        <Route path='customerPanel/:userId' element={<CustomerPanel/>} />
         <Route path='signUp' element={<SignUpCustomer/>} />
+        <Route path='shoppingCart' element={<ShoppingCart/>} />
         <Route path='logout' element={<Logout/>} />
         
       </Routes>

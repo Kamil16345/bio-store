@@ -1,11 +1,20 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom"
+import maintainProducts from '../services/maintainProducts'
 
 export const Home=()=>{
-    const navigate = useNavigate()
     return(
         <>
             <div>Welcome in bio-me store!</div>
+            <button onClick={homePageProducts()}> getProducts</button>
         </>
     )
+    function homePageProducts(){
+        maintainProducts.getAllProducts()
+        .then(response => {
+            console.log(response.data)
+        })
+        .catch(e=>{
+            console.log(e)
+        })
+    }  
 }

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import SignUpCustomerServices from "../services/signUpCustomerServices"
 import {useAuth} from "./auth"
 
-const submitted=false;
 export const SignUpCustomer = () => {
     
     const [email, setEmail] = useState('')
@@ -122,7 +121,9 @@ export const SignUpCustomer = () => {
                         name:response.data.name,
                         surname:response.data.surname,
                         phone:response.data.phone
-                }})
+                    }
+                }),
+                localStorage.setItem("userId", response.data._id)
             ))
             .catch(e =>{
                 console.log(e);

@@ -4,8 +4,10 @@ const mongoose = require('mongoose')
 const express = require('express');
 const { Category } = require('../models/category');
 const router = express.Router();
+const cors = require("cors")
 
-router.get('/', async(req,res)=>{
+router.options('*', cors())
+router.get('/', cors(), async(req,res)=>{
     const products = await Product.find().sort('name')
     res.send(products);
 })

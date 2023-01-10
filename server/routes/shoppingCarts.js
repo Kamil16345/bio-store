@@ -6,14 +6,16 @@ const { Customer } = require('../models/customer');
 const mongoose = require('mongoose')
 const express = require('express');
 const router = express.Router();
+const cors = require("cors")
 
-router.get('/shoppingCarts', async(req,res)=>{
+router.options('*', cors())
+router.get('/shoppingCarts', cors(), async(req,res)=>{
     const shoppingCarts = await Customer.find().select('shoppingCart -_id')
     res.send(shoppingCarts);
     
 })
 
-router.post('/:customerId/shoppingCarts', async(req, res)=>{
+router.post('/:customerId/shoppingCarts', cors(), async(req, res)=>{
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -40,7 +42,7 @@ router.post('/:customerId/shoppingCarts', async(req, res)=>{
 
     res.send(customer)
 })
-router.get('/:customerId/shoppingCart', async (req, res)=>{
+router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
     const customer = await Customer.findById(req.params.customerId)
     
     if(!customer) return res.status(404).send("There is no customer with such ID.")
