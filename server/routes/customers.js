@@ -28,6 +28,7 @@ router.post('/', cors(), async(req, res)=>{
             products: req.body.shoppingCart.products
         }
     })
+    
     customer = await customer.save()
     res.send(customer)
 })

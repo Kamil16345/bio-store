@@ -1,7 +1,6 @@
 import http from "../http-common"
 class SignCustomerServices{
     create(data){
-        console.log("Hello from signing up")
         console.log(data)
         return http.post("/api/customers", data)
     }

@@ -16,7 +16,7 @@ router.post('/', auth, async(req, res)=>{
     const { error } = validateProduct(req.body)
     if(error) return res.status(400).send(error.details[0].message);
     
-    const category = await Category.findById(req.body.categoryId)
+    const category = await Category.findById(req.body.category)
     if(!category) return res.status(400).send('Invalid category')
 
     let product = new Product({
@@ -43,7 +43,7 @@ router.put('/:id', async(req,res)=>{
     if(error){
         res.status(400).send(error.details[0].message)
     }
-    const category = await Category.findById(req.body.categoryId)
+    const category = await Category.findById(req.body.category)
     if(!category) return res.status(400).send('Invalid category')
 
     const product = await Product.findByIdAndUpdate(req.params.id, {

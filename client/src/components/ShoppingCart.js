@@ -1,5 +1,5 @@
 import React from 'react'
-import MaintainShoppingCart from '../services/getUserShoppingCart'
+import MaintainShoppingCart from '../services/maintainUserShoppingCart'
 
 export const ShoppingCart = () => {
   return (
@@ -11,6 +11,7 @@ export const ShoppingCart = () => {
   function getShoppingCart(){
 
     let userId = localStorage.getItem("userId")
+    console.log(userId)
     MaintainShoppingCart.getShoppingCart(userId)
         .then(response =>(
             console.log(response)

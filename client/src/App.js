@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom'
-import {Home} from './components/Home'
+import {Home} from './components/homePage/Home'
 import {SignInCustomer} from './components/SignInCustomer'
 import {Navbar} from './components/Navbar'
 import {CustomerPanel} from './components/CustomerPanel'

@@ -5,9 +5,12 @@ const admin = require('../middleware/admin')
 const {Category, validateCategory} = require('../models/category')
 const express = require('express');
 const mongoose = require('mongoose')
+const { Product } = require('../models/product')
 const router = express.Router();
+const cors = require("cors")
 
-router.get('/', asyncMiddleware(async(req, res, next)=>{
+router.options('*', cors())
+router.get('/', cors(), asyncMiddleware(async(req, res, next)=>{
     //throw new Error("Couldn't get categoies")
     const categories = await Category.find().sort('name');
     res.send(categories)
@@ -15,9 +18,12 @@ router.get('/', asyncMiddleware(async(req, res, next)=>{
 }));
 
 router.get('/:id', validateObjectId, async (req, res)=>{
+    console.log("Hello!!!")
 
     const category = await Category.findById(req.params.id)
     if(!category) return res.status(404).send("There is no category with such ID.")
+    const products= await Product.find(category)
+    console.log(products)
     res.send(category)
 })
 router.post('/', auth, asyncMiddleware(async(req, res)=>{
