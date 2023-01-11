@@ -49,7 +49,7 @@ export const Home=()=>{
                 {categories.map((category) => (
                 <div className='categoryCard' key={category.id}>
                     
-                    <li onClick={}>{category.name}</li>
+                    <li >{category.name}</li>
                 </div>
             ))}
             </div>
