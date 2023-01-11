@@ -111,7 +111,6 @@ export const SignUpCustomer = () => {
             phone:phone,
             shoppingCart:{}
         };
-        
         SignUpCustomerServices.create(data)
             .then(response => (
                 auth.login(email),

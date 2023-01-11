@@ -4,7 +4,10 @@ const mongoose = require('mongoose')
 const express = require('express');
 const { ShoppingCart } = require('../models/shoppingCart');
 const router = express.Router();
-const cors = require("cors")
+const _ = require('lodash')
+const bcrypt = require('bcrypt')
+const cors = require("cors");
+const { User } = require('../models/user');
 
 router.options('*', cors())
 router.get('/', async(req,res)=>{
@@ -17,7 +20,10 @@ router.post('/', cors(), async(req, res)=>{
     const { error } = validateCustomer(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
-    let customer = new Customer({
+    let customer = await Customer.findOne({email:req.body.email})
+    if(customer) return res.status(400).send("There is already account signed up on this email.")
+
+    customer = new Customer({
         email: req.body.email,
         password:req.body.password,
         name: req.body.name,
@@ -28,9 +34,14 @@ router.post('/', cors(), async(req, res)=>{
             products: req.body.shoppingCart.products
         }
     })
-    
+    const salt =await bcrypt.genSalt(10)
+    customer.password = await bcrypt.hash(customer.password, salt)
+        
     customer = await customer.save()
+    const token = customer.generateAuthToken();
+    res.header('x-auth-token', token)
     res.send(customer)
+    return
 })
 router.get('/:email', cors(), async (req, res)=>{
     const customer = await Customer.findOne({email:req.params.email})

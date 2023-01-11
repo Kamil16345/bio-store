@@ -11,7 +11,6 @@ const cors = require("cors")
 
 router.options('*', cors())
 router.get('/', cors(), asyncMiddleware(async(req, res, next)=>{
-    //throw new Error("Couldn't get categoies")
     const categories = await Category.find().sort('name');
     res.send(categories)
 

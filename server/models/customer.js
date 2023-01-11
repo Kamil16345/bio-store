@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const { ShoppingCartSchema } = require('./shoppingCart');
+const jwt = require('jsonwebtoken');
+const config = require('config');
 
 const customerSchema = new mongoose.Schema({
     email: {
@@ -36,6 +38,11 @@ const customerSchema = new mongoose.Schema({
         required: false
     }
 })
+
+customerSchema.methods.generateAuthToken = function(){
+    const token = jwt.sign({_id:this._id, email: this.email}, config.get('jwtPrivateKey'))
+    return token
+}
 
 const Customer = mongoose.model('Customer', customerSchema);
 
