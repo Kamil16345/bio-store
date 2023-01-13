@@ -6,7 +6,8 @@ class MaintainShoppingCart{
     }
     postProduct(customerId, product){
         console.log(customerId)
-        return http.post(`/api/${customerId}/shoppingCart`, product)
+        console.log(product)
+        return http.post(`/api/${customerId}/shoppingCart`)
     }
 }
 export default new MaintainShoppingCart();

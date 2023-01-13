@@ -122,7 +122,7 @@ export const SignUpCustomer = () => {
                         phone:response.data.phone
                     }
                 }),
-                localStorage.setItem("userId", response.data._id)
+                localStorage.setItem("customerId", response.data._id)
             ))
             .catch(e =>{
                 console.log(e);

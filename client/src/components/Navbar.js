@@ -6,16 +6,17 @@ import maintainProducts from '../services/maintainProducts'
 
 export const Navbar = () => {
   const auth = useAuth()
+  let customerId=localStorage.getItem("customerId")
   return (
     <nav>
         <NavLink to='/'>Home</NavLink>
-        {!auth.email && (
+        {!customerId && (
             <>
               <NavLink to='signUp'>Sign Up</NavLink>
               <NavLink to='authenticate'>Sign In</NavLink>
             </>
         )}
-        {auth.email && (
+        {customerId && (
             <>
               <NavLink to='customerPanel'>Customer Panel</NavLink>
               <NavLink to='shoppingCart' id="shoppingCart">ShoppingCart</NavLink>

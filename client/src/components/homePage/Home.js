@@ -6,7 +6,7 @@ import maintainUserShoppingCart from '../../services/maintainUserShoppingCart';
 export const Home=()=>{
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-    let userId = localStorage.getItem("userId")
+    let customerId = localStorage.getItem("customerId")
     useEffect(() => {
         homePageProducts();
         navigationCategories();
@@ -24,8 +24,7 @@ export const Home=()=>{
                 children[i].children[0].dataset.productId=response.data[i]._id
                 children[i].children[1].dataset.productName=response.data[i].name
                 children[i].children[2].dataset.productCategory=response.data[i].category.name
-
-                
+ 
             }
         })
         .catch((e)=>{
@@ -45,11 +44,18 @@ export const Home=()=>{
     }
 
     function addToCart(event){
-        if(userId){
-            let products = document.getElementById("products")
-            console.log(products)
-            console.log("event data: ")
-            console.log(event.target.parentElement)
+        if(customerId){
+            let product=event.target.parentElement
+            let productId = product.getAttribute("id")
+            console.log(productId)
+            maintainUserShoppingCart.postProduct(customerId, productId)
+                .then((response)=>{
+                    console.log(response.data)
+                })
+                .catch((e)=>{
+                    console.log(e)
+                })
+
         }else{
             console.log("You are not logged in.")
         }

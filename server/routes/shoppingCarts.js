@@ -16,6 +16,7 @@ router.get('/shoppingCarts', cors(), async(req,res)=>{
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
+    console.log(req.body)
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -42,6 +43,7 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
 
     res.send(customer)
 })
+
 router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
     const customer = await Customer.findById(req.params.customerId)
     
@@ -50,13 +52,6 @@ router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
     res.send(customer.shoppingCart)
 })
 router.put('/:customerId/shoppingCart', async(req,res)=>{
-    //TODO: 
-    //*restructure shoppingCart structure - product will be array with properties: 
-                                          //productId
-                                          //name
-                                          //amount
-                                          //price(amount*productPrice)
-    //finish updating put method(you want to update amount)
     const { error } = validateShoppingCart(req.body);
     if(error){
         res.status(400).send(error.details[0].message)

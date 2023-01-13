@@ -10,9 +10,9 @@ export const ShoppingCart = () => {
   )
   function getShoppingCart(){
 
-    let userId = localStorage.getItem("userId")
-    console.log(userId)
-    MaintainShoppingCart.getShoppingCart(userId)
+    let customerId = localStorage.getItem("customerId")
+    console.log(customerId)
+    MaintainShoppingCart.getShoppingCart(customerId)
         .then(response =>(
             console.log(response)
         ))

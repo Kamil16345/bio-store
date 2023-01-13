@@ -17,7 +17,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='*' element={<NoMatch/>} />
         <Route path='authenticate' element={<SignInCustomer/>} />
-        <Route path='customerPanel/:userId' element={<CustomerPanel/>} />
+        <Route path='customerPanel/:customerId' element={<CustomerPanel/>} />
         <Route path='signUp' element={<SignUpCustomer/>} />
         <Route path='shoppingCart' element={<ShoppingCart/>} />
         <Route path='logout' element={<Logout/>} />

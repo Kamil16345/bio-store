@@ -1,5 +1,5 @@
 import http from "../http-common"
-class SignCustomerServices{
+class SignUpCustomerServices{
     create(data){
         console.log(data)
         return http.post("/api/customers", data)
@@ -9,4 +9,4 @@ class SignCustomerServices{
     }
 }
 
-export default new SignCustomerServices();
+export default new SignUpCustomerServices();
