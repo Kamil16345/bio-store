@@ -17,6 +17,7 @@ router.get('/', async(req,res)=>{
 })
 
 router.post('/', cors(), async(req, res)=>{
+    console.log(req.body)
     const { error } = validateCustomer(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 

@@ -5,7 +5,7 @@ export const ShoppingCart = () => {
   return (
     <>
     <div>ShoppingCart</div>
-    <button onClick={getShoppingCart()}>getShoppingCart</button>
+    <button onClick={()=>getShoppingCart()}>getShoppingCart</button>
     </>
   )
   function getShoppingCart(){

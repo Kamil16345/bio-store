@@ -111,7 +111,8 @@ export const SignUpCustomer = () => {
             phone:phone,
             shoppingCart:{}
         };
-        SignUpCustomerServices.create(data)
+        let param = "customers"
+        SignUpCustomerServices.create(param, data)
             .then(response => (
                 auth.login(email),
                 navigate(`/customerPanel/${email}`, {

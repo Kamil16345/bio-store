@@ -1,8 +1,8 @@
 import http from "../http-common"
 class SignUpCustomerServices{
-    create(data){
+    create(param, data){
         console.log(data)
-        return http.post("/api/customers", data)
+        return http.post(`/api/${param}`, data)
     }
     getCustomer(email){
         return http.post(`/api/customers/${email}`)

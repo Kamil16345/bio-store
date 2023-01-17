@@ -10,8 +10,9 @@ export const Logout = () => {
   
   auth.logout()
   useEffect(()=>{
-    navigate('/')
     window.location.reload()
+    navigate('/')
+    
   })
   
 

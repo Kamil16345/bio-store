@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import maintainProducts from '../../services/maintainProducts'
 import maintainCategories from '../../services/maintainCategories'
 import maintainUserShoppingCart from '../../services/maintainUserShoppingCart';
+import axios from 'axios';
+
 
 export const Home=()=>{
     const [products, setProducts] = useState([]);
@@ -46,16 +48,12 @@ export const Home=()=>{
     function addToCart(event){
         if(customerId){
             let product=event.target.parentElement
-            let productId = product.getAttribute("id")
-            console.log(productId)
-            maintainUserShoppingCart.postProduct(customerId, productId)
-                .then((response)=>{
-                    console.log(response.data)
-                })
-                .catch((e)=>{
-                    console.log(e)
-                })
-
+            let productId=product.getAttribute("id")
+            var customerData={
+                productId:productId,
+                customerId:customerId
+            }
+            maintainUserShoppingCart.postProduct(customerData)
         }else{
             console.log("You are not logged in.")
         }

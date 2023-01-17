@@ -9,13 +9,25 @@ const router = express.Router();
 const cors = require("cors")
 
 router.options('*', cors())
+router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
+    console.log("req.body: ")
+    console.log(req.params.customerId)
+    const shoppingCart = await Customer.findById(req.params.customerId).select('shoppingCart -_id')
+    console.log(shoppingCart.shoppingCart.products)
+    res.send(shoppingCart);
+    
+})
 router.get('/shoppingCarts', cors(), async(req,res)=>{
+    
     const shoppingCarts = await Customer.find().select('shoppingCart -_id')
     res.send(shoppingCarts);
     
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
+    console.log("req.params: ")
+    console.log(req.params)
+    console.log("req.body: ")
     console.log(req.body)
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
