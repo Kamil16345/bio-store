@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import { useAuth } from './auth'
-import maintainProducts from '../services/maintainProducts'
+import { useAuth } from '../AuthenticateAdmin/AuthenticateAdmin'
+import maintainProducts from '../../services/maintainProducts'
 
 
 export const Navbar = () => {

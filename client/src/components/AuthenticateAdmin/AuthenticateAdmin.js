@@ -8,10 +8,10 @@ export const AuthProvider = ({children}) => {
     const login = (email) =>{
         setEmail(email)
     }
-
     const logout = () =>{
         setEmail(null)
     }
+    
   return (
     <AuthContext.Provider value={{email, login, logout}}>
         {children}

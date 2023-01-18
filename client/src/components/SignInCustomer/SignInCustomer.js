@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthenticateDataService from "../services/signInCustomerServices"
-import {useAuth} from "./auth"
+import AuthenticateDataService from "../../services/signInCustomerServices"
+import {useAuth} from "../AuthenticateAdmin/AuthenticateAdmin"
 
 const submitted=false;
 export const SignInCustomer = () => {

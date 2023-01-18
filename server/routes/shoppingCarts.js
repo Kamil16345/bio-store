@@ -25,10 +25,6 @@ router.get('/shoppingCarts', cors(), async(req,res)=>{
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
-    console.log("req.params: ")
-    console.log(req.params)
-    console.log("req.body: ")
-    console.log(req.body)
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 

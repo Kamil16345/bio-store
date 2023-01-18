@@ -1,13 +1,13 @@
 import {Routes, Route} from 'react-router-dom'
 import {Home} from './components/homePage/Home'
-import {SignInCustomer} from './components/SignInCustomer'
-import {Navbar} from './components/Navbar'
-import {CustomerPanel} from './components/CustomerPanel'
-import { SignUpCustomer } from './components/SignUpCustomer'
-import { NoMatch } from './components/NoMatch'
-import {AuthProvider} from "./components/auth"
-import {Logout} from "./components/Logout"
-import { ShoppingCart } from './components/ShoppingCart'
+import {SignInCustomer} from './components/SignInCustomer/SignInCustomer'
+import {Navbar} from './components/Navbar/Navbar'
+import {CustomerPanel} from './components/CustomerPanel/CustomerPanel'
+import { SignUpCustomer } from './components/SignUpCustomer/SignUpCustomer'
+import { NoMatch } from './components/NoMatch/NoMatch'
+import {AuthProvider} from "./components/AuthenticateAdmin/AuthenticateAdmin"
+import {Logout} from "./components/Logout/Logout"
+import { ShoppingCart } from './components/ShoppingCart/ShoppingCart'
 
 function App() {
   return (
