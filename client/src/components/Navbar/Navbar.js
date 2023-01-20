@@ -16,9 +16,10 @@ export const Navbar = () => {
               <NavLink to='authenticate'>Sign In</NavLink>
             </>
         )}
+        ``
         {customerId && (
             <>
-              <NavLink to='customerPanel'>Customer Panel</NavLink>
+              <NavLink to='customerPanel/${customerId}'>Customer Panel</NavLink>
               <NavLink to='shoppingCart' id="shoppingCart">ShoppingCart</NavLink>
               <NavLink to='/logout' id="logoutButton">Logout</NavLink>
             </>

@@ -15,12 +15,13 @@ router.get('/', cors(), asyncMiddleware(async(req, res, next)=>{
     res.send(categories)
 
 }));
-
-router.get('/:id', validateObjectId, async (req, res)=>{
+//validateObjectId
+router.get('/:id', cors(), async (req, res)=>{
 
     let category = await Category.findById(req.params.id)
     if(!category) return res.status(404).send("There is no category with such ID.")
-    let products= await Product.find({}).select('name numberInStock ')
+    let products= await Product.find().where('category._id').equals(category).select('name numberInStock ')
+    console.log(products)
     for(let i=0; i<products.length; i++){
         category.products.push(products[i])
     }

@@ -8,6 +8,7 @@ import { NoMatch } from './components/NoMatch/NoMatch'
 import {AuthProvider} from "./components/AuthenticateAdmin/AuthenticateAdmin"
 import {Logout} from "./components/Logout/Logout"
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart'
+import {Category} from './components/Category/Category'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='*' element={<NoMatch/>} />
         <Route path='authenticate' element={<SignInCustomer/>} />
         <Route path='customerPanel/:customerId' element={<CustomerPanel/>} />
+        <Route path='/:category' element={<Category />} />
         <Route path='signUp' element={<SignUpCustomer/>} />
         <Route path='shoppingCart' element={<ShoppingCart/>} />
         <Route path='logout' element={<Logout/>} />

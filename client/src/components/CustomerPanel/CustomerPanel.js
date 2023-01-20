@@ -6,7 +6,6 @@ export const CustomerPanel =() => {
   //const params = useParams()
   const {state}=useLocation()
   const {name}=state
-  console.log(state)
   return (
       <h2>Hello, {name}</h2>
   )

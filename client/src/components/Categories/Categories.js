@@ -1,34 +1,57 @@
-import React, { useState, useEffect } from 'react'
-import maintainCategories from '../../services/maintainCategories'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import maintainCategories from "../../services/maintainCategories";
 
-export const Categories = ()=>{
+export const Categories = ({ navigation }) => {
+  const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
-    const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    navigationCategories();
+  }, []);
 
-    useEffect(() => {
-        navigationCategories();
-    }, []);
-    function navigationCategories(){
-        maintainCategories.getAllCategories()
-        .then((response)=>{
-            setCategories(response.data)
-            console.log(categories)
-        })
-        .catch((e)=>{
-            console.log(e)
-        })
-    }
+  function navigationCategories() {
+    maintainCategories
+      .getAllCategories()
+      .then((response) => {
+        setCategories(response.data);
+        let categoriesDiv = document.getElementById("categories");
+        let children = categoriesDiv.children;
 
-    return (
-        <div className="categories">
-          <div>Categories</div>
-          {categories.map((category) => (
-            <div className="categoryCard" key={category.id}>
-              <li><a href='http://gogle.pl'>{category.name}</a></li>
-            </div>
-          ))}
-        </div>
-      );
-}
+        setTimeout(() => {
+          for (let i = 0; i < response.data.length; i++) {
+            children[i].children[0].dataset.categoryId = response.data[i]._id;
+          }
+        }, 20);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
+  async function redirectToCategory(event) {
+    let clickedCategory = event.target;
+    let categoryId = clickedCategory.getAttribute("data-category-id");
+    let category = await maintainCategories.getCategory(categoryId);
+    navigate(`/${categoryId}`, { state: {
+      id:category.data._id,
+      name: category.data.name,
+      products: category.data.products
+    } });
+  }
 
+  return (
+    <>
+      <div>Categories</div>
+      <div className="categories" id="categories">
+        {categories.map((category) => (
+          <div className="categoryCard" key={category.id}>
+            <button onClick={(event) => redirectToCategory(event)}>
+              {category.name}
+            </button>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+};

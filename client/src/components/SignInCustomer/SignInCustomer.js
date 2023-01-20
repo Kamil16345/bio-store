@@ -70,9 +70,6 @@ export const SignInCustomer = () => {
             password: password
         };
 
-        // localStorage.setItem("userData", data)
-        // console.log(localStorage)
-
         AuthenticateDataService.getCustomer(data.email)
         .then(response => (
             auth.login(email),

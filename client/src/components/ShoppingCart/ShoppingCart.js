@@ -18,12 +18,10 @@ export const ShoppingCart = () => {
   );
   function getShoppingCart() {
     let customerId = localStorage.getItem("customerId");
-    console.log(customerId);
     MaintainShoppingCart.getShoppingCart(customerId)
       .then((response) => console.log(response))
       .catch((e) => {
         console.log(e);
       });
-    console.log();
   }
 };
