@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom'
-import {Home} from './components/homePage/Home'
+import {Home} from './components/Home/Home'
 import {SignInCustomer} from './components/SignInCustomer/SignInCustomer'
 import {Navbar} from './components/Navbar/Navbar'
 import {CustomerPanel} from './components/CustomerPanel/CustomerPanel'
@@ -17,12 +17,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='*' element={<NoMatch/>} />
-        <Route path='authenticate' element={<SignInCustomer/>} />
+        <Route path='authCustomer' element={<SignInCustomer/>} />
         <Route path='customerPanel/:customerId' element={<CustomerPanel/>} />
         <Route path='/:category' element={<Category />} />
         <Route path='signUp' element={<SignUpCustomer/>} />
         <Route path='shoppingCart' element={<ShoppingCart/>} />
         <Route path='logout' element={<Logout/>} />
+        <Route path='authUser' element={<Home/>} />
         
       </Routes>
     </AuthProvider>

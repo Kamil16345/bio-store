@@ -15,12 +15,12 @@ router.get('/', async (req, res)=>{
     res.send(users)
 })
 
-router.get('/me', auth, async(req, res)=>{
+router.get('/:userId', auth, async(req, res)=>{
     const user = await User.findById(req.user._id).select('-password')
     res.send(user);
 })
 
-router.post('/', cors(), async(req, res)=>{
+router.post('/authenticateUser', cors(), async(req, res)=>{
     const { error } = validateUser(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 

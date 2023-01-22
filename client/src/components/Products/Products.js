@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useNavigate } from "react";
+import React, { useState, useEffect} from "react";
 
 import maintainProducts from "../../services/maintainProducts";
 import maintainUserShoppingCart from "../../services/maintainUserShoppingCart";
-var customerId = localStorage.getItem("customerId");
+const customerId = localStorage.getItem("customerId");
 //const navigate = useNavigate();
 
 export const Products = ({ productsOfCategory }) => {
@@ -25,10 +25,11 @@ export const Products = ({ productsOfCategory }) => {
         setTimeout(() => {
           for (let i = 0; i < response.data.length; i++) {
             children[i].setAttribute("id", response.data[i]._id);
+            children[i].children[0].dataset.productCategory =
+              response.data[i].category.name;
             children[i].children[0].dataset.productId = response.data[i]._id;
             children[i].children[1].dataset.productName = response.data[i].name;
-            // children[i].children[2].dataset.productCategory =
-            //   response.data[i].category.name;
+            children[i].children[1].dataset.price = response.data[i].price;
           }
         }, 20);
       })
@@ -43,8 +44,9 @@ export const Products = ({ productsOfCategory }) => {
       <div className="products" id="products">
         {products.map((product) => (
           <div className="card" key={product.id}>
+            {/* <img src="" /> */}
             <h3 id="productName">{product.name}</h3>
-            {/* <h5 id="productCategory">{product.category.name}</h5> */}
+            <h5 id="productPrice">{product.price} zł</h5>
             <button id="addToCartButton" onClick={(event) => addToCart(event)}>
               Add to cart
             </button>

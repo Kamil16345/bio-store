@@ -17,11 +17,11 @@ const productSchema = new mongoose.Schema({
         min:0,
         max:255
     },
-    dailySales:{
-        type:Number,
-        default:0,
+    price:{
+        type: Number,
+        default: 0,
         min:0,
-        max:255
+        max:9999
     }
 });
 const Product = mongoose.model('Product', productSchema);
@@ -31,7 +31,7 @@ function validateProduct(product){
         name: Joi.string().min(2).required(),
         category:Joi.required(),
         numberInStock: Joi.number().min(0).max(255),
-        dailySales: Joi.number().min(0).max(255)
+        price: Joi.number().min(0).max(9999).required()
     }
     return Joi.validate(product, schema)
 }

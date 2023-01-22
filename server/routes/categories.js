@@ -1,63 +1,75 @@
-const validateObjectId = require('../middleware/validateObjectId')
-const asyncMiddleware = require('../middleware/async')
-const auth = require('../middleware/auth')
-const admin = require('../middleware/admin')
-const {Category, validateCategory} = require('../models/category')
-const express = require('express');
-const mongoose = require('mongoose')
-const { Product } = require('../models/product')
+const validateObjectId = require("../middleware/validateObjectId");
+const asyncMiddleware = require("../middleware/async");
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
+const { Category, validateCategory } = require("../models/category");
+const express = require("express");
+const mongoose = require("mongoose");
+const { Product } = require("../models/product");
 const router = express.Router();
-const cors = require("cors")
+const cors = require("cors");
 
-router.options('*', cors())
-router.get('/', cors(), asyncMiddleware(async(req, res, next)=>{
-    const categories = await Category.find().sort('name');
-    res.send(categories)
-
-}));
+router.options("*", cors());
+router.get("/", cors(),asyncMiddleware(async (req, res, next) => {
+    const categories = await Category.find().sort("name");
+    res.send(categories);
+  })
+);
 //validateObjectId
-router.get('/:id', cors(), async (req, res)=>{
-
-    let category = await Category.findById(req.params.id)
-    if(!category) return res.status(404).send("There is no category with such ID.")
-    let products= await Product.find().where('category._id').equals(category).select('name numberInStock ')
-    console.log(products)
-    for(let i=0; i<products.length; i++){
-        category.products.push(products[i])
-    }
-    res.send(category)
-})
-router.post('/', auth, asyncMiddleware(async(req, res)=>{
-
-    const { error } = validateCategory(req.body)
-    if(error){
-        res.status(400).send(error.details[0].message);
-        return;
-    }
-
-    let category = new Category({name: req.body.name});
-    category = await category.save();
-
-    res.send(category);
-}));
-
-router.put('/:id', async(req,res)=>{
+router.get("/:id", cors(), async (req, res) => {
+  let category = await Category.findById(req.params.id);
+  if (!category)
+    return res.status(404).send("There is no category with such ID.");
+  let products = await Product.find()
+    .where("category._id")
+    .equals(category)
+    .select("name numberInStock price");
+  console.log(products);
+  for (let i = 0; i < products.length; i++) {
+    category.products.push(products[i]);
+  }
+  res.send(category);
+});
+router.post("/", auth, asyncMiddleware(async (req, res) => {
     const { error } = validateCategory(req.body);
-    if(error){
-        res.status(400).send(error.details[0].message)
+    if (error) {
+      res.status(400).send(error.details[0].message);
+      return;
     }
+    let category = new Category({ name: req.body.name });
+    let categoryFromStack = Category.findOne({ name: req.body.name })
+    if (categoryFromStack) {
+        res.status(400).send("There is already category with that name")
+        return
+    }
+    category = await category.save();
+    res.send(category);
+  })
+);
 
-    const category = await Category.findByIdAndUpdate(req.params.id, {name: req.body.name}, {new: true})
-    if(!category) return res.status(404).send("There is no category with such ID.")
+router.put("/:id", async (req, res) => {
+  const { error } = validateCategory(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+  }
 
-    res.send(category)
-})
-router.delete('/:id', [auth, admin], async(req, res)=>{
-    const category = await Category.findByIdAndRemove(req.params.id)
+  const category = await Category.findByIdAndUpdate(
+    req.params.id,
+    { name: req.body.name },
+    { new: true }
+  );
+  if (!category)
+    return res.status(404).send("There is no category with such ID.");
 
-    if(!category) return res.status(404).send("There is no category with such ID.")
+  res.send(category);
+});
+router.delete("/:id", [auth, admin], async (req, res) => {
+  const category = await Category.findByIdAndRemove(req.params.id);
 
-    res.send(category)
-})
+  if (!category)
+    return res.status(404).send("There is no category with such ID.");
+
+  res.send(category);
+});
 
 module.exports = router;

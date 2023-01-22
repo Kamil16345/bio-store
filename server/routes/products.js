@@ -26,7 +26,7 @@ router.post('/', auth, async(req, res)=>{
             name: category.name
         },
         numberInStock: req.body.numberInStock,
-        dailySales: req.body.dailySales
+        price: req.body.price
     })
     product = await product.save()
     res.send(product)
@@ -52,8 +52,8 @@ router.put('/:id', async(req,res)=>{
             _id: category._id,
             name: category.name
         },
-        numberInStock: req.body.numberInStock,
-        dailySales: req.body.dailySales
+        numberInStock: req.body.numberInStock.Category,
+        price: req.body.price
     }, 
     {
         new: true

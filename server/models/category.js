@@ -1,9 +1,10 @@
 const Joi = require('joi');
 const mongoose = require('mongoose')
 
-const minProductSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema({
     name: String,
-    numberInStock:Number
+    numberInStock:Number,
+    price: Number
 })
 
 const categorySchema = new mongoose.Schema({
@@ -11,9 +12,8 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     }, 
-    products:[minProductSchema]
+    products:[ProductSchema]
 });
-
 
 const Category = mongoose.model('Category', categorySchema)
 
