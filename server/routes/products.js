@@ -16,13 +16,12 @@ router.post('/', auth, async(req, res)=>{
     const { error } = validateProduct(req.body)
     if(error) return res.status(400).send(error.details[0].message);
     
-    const category = await Category.findById(req.body.category)
+    const category = await Category.findOne({name: req.body.category.name})
     if(!category) return res.status(400).send('Invalid category')
 
     let product = new Product({
         name:req.body.name,
         category:{
-            _id: category._id,
             name: category.name
         },
         numberInStock: req.body.numberInStock,

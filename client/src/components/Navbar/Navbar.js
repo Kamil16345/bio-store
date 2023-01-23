@@ -18,7 +18,7 @@ export const Navbar = () => {
       )}
       {customerId && (
         <>
-          <NavLink to="customerPanel/${customerId}">Customer Panel</NavLink>
+          <NavLink to={'customerPanel/'+customerId}>Customer Panel</NavLink>
           <NavLink to="shoppingCart" id="shoppingCart">
             ShoppingCart
           </NavLink>

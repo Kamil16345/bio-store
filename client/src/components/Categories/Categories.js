@@ -30,14 +30,18 @@ export const Categories = ({ navigation }) => {
   }
 
   async function redirectToCategory(event) {
+
     let clickedCategory = event.target;
     let categoryId = clickedCategory.getAttribute("data-category-id");
     let category = await maintainCategories.getCategory(categoryId);
-    navigate(`/${categoryId}`, { state: {
-      id:category.data._id,
-      name: category.data.name,
-      products: category.data.products
-    } });
+    navigate(`/${categoryId}`, {
+      state: {
+        id: category.data._id,
+        name: category.data.name,
+        products: category.data.products,
+      },
+    });
+    //window.location.reload()
   }
 
   return (

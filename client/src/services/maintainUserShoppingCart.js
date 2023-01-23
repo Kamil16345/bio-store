@@ -16,7 +16,7 @@ class MaintainShoppingCart{
                 'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'application/json',
             }
-        })
+        }, console.log("customerData: "), console.log(customerData))
     }
 }
 export default new MaintainShoppingCart();

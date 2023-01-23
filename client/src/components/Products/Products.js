@@ -1,19 +1,22 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import maintainProducts from "../../services/maintainProducts";
 import maintainUserShoppingCart from "../../services/maintainUserShoppingCart";
-const customerId = localStorage.getItem("customerId");
+
 //const navigate = useNavigate();
 
 export const Products = ({ productsOfCategory }) => {
   const [products, setProducts] = useState([]);
+  const { state } = useLocation();
   useEffect(() => {
     if (productsOfCategory) {
       setProducts(productsOfCategory);
+      categoryProducts(productsOfCategory);
     } else {
       homePageProducts();
     }
-  }, []);
+  }, [state]);
 
   function homePageProducts() {
     maintainProducts
@@ -37,6 +40,27 @@ export const Products = ({ productsOfCategory }) => {
         console.log(e);
       });
   }
+  function categoryProducts(products) {
+    let productsDiv = document.getElementById("products");
+    let children = productsDiv.children;
+    console.log("productsDiv.length: ");
+    console.log(children);
+    //console.log(productsDiv.children[0].children[0])
+    //productsDiv.children[0].children[0].dataset.productId=products[0]._id
+    //children - class = "card"
+    setTimeout(() => {
+      for (let i = 0; i < children.length; i++) {
+        console.log("Helllooooo");
+        children[i].setAttribute("id", products[i]._id);
+        children[i].children[0].dataset.productCategory =
+        products.data[i].category.name;
+        productsDiv.children[i].children[0].dataset.productName =
+          products[i].name;
+        productsDiv.children[i].children[1].dataset.price = products[i].price;
+        
+      }
+    }, 20);
+  }
 
   return (
     <>
@@ -58,6 +82,7 @@ export const Products = ({ productsOfCategory }) => {
 };
 
 export const addToCart = (event) => {
+  const customerId = localStorage.getItem("customerId");
   if (customerId) {
     let product = event.target.parentElement;
     let productId = product.getAttribute("id");
