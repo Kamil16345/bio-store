@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import maintainProducts from "../../services/maintainProducts";
 import maintainUserShoppingCart from "../../services/maintainUserShoppingCart";
 
+import './Products.css'
 //const navigate = useNavigate();
 
 export const Products = ({ productsOfCategory }) => {
@@ -44,20 +45,19 @@ export const Products = ({ productsOfCategory }) => {
     let productsDiv = document.getElementById("products");
     let children = productsDiv.children;
     console.log("productsDiv.length: ");
-    console.log(children);
-    //console.log(productsDiv.children[0].children[0])
-    //productsDiv.children[0].children[0].dataset.productId=products[0]._id
+    console.log(products);
+    
     //children - class = "card"
     setTimeout(() => {
+      //children[0].children[0].dataset.productCategory = 
+      console.log("products.parentElement: ")
+      console.log(products.parentElement)
       for (let i = 0; i < children.length; i++) {
-        console.log("Helllooooo");
         children[i].setAttribute("id", products[i]._id);
-        children[i].children[0].dataset.productCategory =
-        products.data[i].category.name;
         productsDiv.children[i].children[0].dataset.productName =
           products[i].name;
+
         productsDiv.children[i].children[1].dataset.price = products[i].price;
-        
       }
     }, 20);
   }

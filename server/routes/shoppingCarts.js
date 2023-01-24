@@ -9,47 +9,21 @@ const router = express.Router();
 const cors = require("cors")
 
 router.options('*', cors())
-router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
-    console.log("req.body: ")
-    console.log(req.params.customerId)
-    const shoppingCart = await Customer.findById(req.params.customerId).select('shoppingCart -_id')
-    console.log(shoppingCart.shoppingCart.products)
-    res.send(shoppingCart);
-    
-})
+
 router.get('/shoppingCarts', cors(), async(req,res)=>{
     
     const shoppingCarts = await Customer.find().select('shoppingCart -_id')
     res.send(shoppingCarts);
-    
 })
 
-router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
-    const { error } = validateShoppingCart(req.body)
-    if(error) return res.status(400).send(error.details[0].message);
+router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
+    console.log("req.body: ")
+    console.log(req.params.customerId)
+    const shoppingCart = await Customer.findById(req.params.customerId).select('shoppingCart -_id')
 
-    const customer = await Customer.findById(req.params.customerId)
-    if(!customer) return res.status(400).send('Invalid customer')
-
-    const product = await Product.findById(req.body.productId)
-    if(!product) return res.status(400).send('Invalid product')
-
-    // let shoppingCart = new ShoppingCart({
-    //     product:{
-    //         _id:product._id,
-    //         name:product.name,
-    //         numberInStock: product.numberInStock,
-    //     },
-    // })
-
-    customer.shoppingCart.products.push(product)
-
-    shoppingCart = await customer.save()
+    console.log(shoppingCart.shoppingCart.products)
+    res.send(shoppingCart);
     
-    product.numberInStock--;
-    product.save()
-
-    res.send(customer)
 })
 
 router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
@@ -59,6 +33,32 @@ router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
 
     res.send(customer.shoppingCart)
 })
+
+router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
+    const { error } = validateShoppingCart(req.body)
+    if(error) return res.status(400).send(error.details[0].message);
+
+    let customer = await Customer.findById(req.params.customerId)
+    if(!customer) return res.status(400).send('Invalid customer')
+
+    let product = await Product.findById(req.body.productId)
+    if(!product) return res.status(400).send('Invalid product')
+    
+    let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)
+    
+    shoppingCart.products.push(product)
+    customer.shoppingCart.products.push(product)
+
+    shoppingCart = await shoppingCart.save();
+    customer = await customer.save()
+    
+    product.numberInStock--;
+    product.save()
+
+    res.send(customer)
+})
+
+
 router.put('/:customerId/shoppingCart', async(req,res)=>{
     const { error } = validateShoppingCart(req.body);
     if(error){

@@ -8,7 +8,10 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     category: {
-        type: categorySchema,
+        type: {
+            name: String,
+            _id: String
+        },
         required: true
     },
     numberInStock:{

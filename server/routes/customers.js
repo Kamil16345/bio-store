@@ -23,23 +23,23 @@ router.post('/', cors(), async(req, res)=>{
 
     let customer = await Customer.findOne({email:req.body.email})
     if(customer) return res.status(400).send("There is already account signed up on this email.")
-    const shoppingCart = new ShoppingCart()
+    let shoppingCart = new ShoppingCart()
+
     customer = new Customer({
         email: req.body.email,
         password:req.body.password,
         name: req.body.name,
         surname: req.body.surname,
         phone: req.body.phone,
-        isGold:req.body.isGold,
-        shoppingCart: new ShoppingCart({})//{
-            //products: req.body.shoppingCart.products
-
-        //}
+        isGold: req.body.isGold,
+        shoppingCart: await shoppingCart.save()
     })
     const salt =await bcrypt.genSalt(10)
     customer.password = await bcrypt.hash(customer.password, salt)
-        
+    //subdoc.save({ suppressWarning: true })
     customer = await customer.save()
+    //shoppingCart = await shoppingCart.save()
+    
     const token = customer.generateAuthToken();
     res.header('x-auth-token', token)
     res.send(customer)
