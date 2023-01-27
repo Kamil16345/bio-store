@@ -48,7 +48,9 @@ router.post("/", auth, asyncMiddleware(async (req, res) => {
       return;
     }
     let category = new Category({ name: req.body.name });
-    let categoryFromStack = Category.findOne({ name: req.body.name })
+    let categoryFromStack = await Category.findOne({ name: req.body.name }).exec()
+    console.log("categoryFromStack: ")
+    console.log(categoryFromStack)
     if (categoryFromStack) {
         res.status(400).send("There is already category with that name")
         return

@@ -45,13 +45,17 @@ router.post('/', auth, async(req, res)=>{
 })
 
 router.put('/:id', async(req,res)=>{
+    console.log("req.body: ")
+    console.log(req.body)
     const { error } = validateProduct(req.body);
     if(error){
         res.status(400).send(error.details[0].message)
     }
-    const category = await Category.findById(req.body.category)
-    if(!category) return res.status(400).send('Invalid category')
-
+    
+    const category = await Category.findOne({name: req.body.category.name})
+    console.log(category)
+    //const category = await Category.findOne({name: req.body.category.name})
+    
     const product = await Product.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         category:{
@@ -64,21 +68,40 @@ router.put('/:id', async(req,res)=>{
     {
         new: true
     })
+    await product.save()
+
+    let index = category.products.findIndex(product=> 
+        product._id.valueOf()===req.params.id
+    )
+    if(index !== -1){
+        category.products.splice(index, 1)
+    }
+    
+    category.products.push(product)
+    
+    if(!category) return res.status(400).send('Invalid category')   
     if(!product) return res.status(404).send("There is no product with such ID.")
+
+    await category.save()
 
     res.send(product)
 })
 router.delete('/:id', async(req, res)=>{
-    
     const product = await Product.findByIdAndRemove(req.params.id)
-    const category = await Category.
-
-    console.log("category: ")
-    console.log(category)
     if(!product) return res.status(404).send("There is no product with such ID.")
 
+    const category = await Category.findById(product.category._id)
+    
+    for(const [key, value] of Object.entries(category.products)){
+        if(value._id.valueOf()==req.params.id){
+            let index = category.products.indexOf(value)
+            if (index !== -1) {
+                category.products.splice(index, 1);
+            }
+        }
+    }
+    await category.save()
     res.send(product)
 })
 
 module.exports = router
-
