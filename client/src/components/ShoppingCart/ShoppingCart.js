@@ -5,6 +5,14 @@ export const ShoppingCart = () => {
   
   const [products, setProducts]=useState([]);
 
+  function getShoppingCart() {
+    let customerId = localStorage.getItem("customerId");
+    MaintainShoppingCart.getShoppingCart(customerId)
+      .then((response) => console.log(response))
+      .catch((e) => {
+        console.log(e);
+      });
+  }
   return (
     <>
       {products.map((product) => (
@@ -16,12 +24,5 @@ export const ShoppingCart = () => {
       <button onClick={() => getShoppingCart()}>getShoppingCart</button> */}
     </>
   );
-  function getShoppingCart() {
-    let customerId = localStorage.getItem("customerId");
-    MaintainShoppingCart.getShoppingCart(customerId)
-      .then((response) => console.log(response))
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+
 };

@@ -12,26 +12,24 @@ router.options('*', cors())
 
 router.get('/shoppingCarts', cors(), async(req,res)=>{
     
-    const shoppingCarts = await Customer.find().select('shoppingCart -_id')
+    //const shoppingCarts = await Customer.find().select('shoppingCart -_id')
+    const shoppingCarts = await ShoppingCart.find()
+    console.log(shoppingCarts)
     res.send(shoppingCarts);
 })
 
 router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
     console.log("req.body: ")
     console.log(req.params.customerId)
+
+    const customer = await Customer.findById(req.params.customerId)
+    
+    if(!customer) return res.status(404).send("There is no customer with such ID.")
     const shoppingCart = await Customer.findById(req.params.customerId).select('shoppingCart -_id')
 
     console.log(shoppingCart.shoppingCart.products)
     res.send(shoppingCart);
     
-})
-
-router.get('/:customerId/shoppingCart', cors(), async (req, res)=>{
-    const customer = await Customer.findById(req.params.customerId)
-    
-    if(!customer) return res.status(404).send("There is no customer with such ID.")
-
-    res.send(customer.shoppingCart)
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
@@ -45,7 +43,8 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
     if(!product) return res.status(400).send('Invalid product')
     
     let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)
-    
+    console.log("product: ")
+    console.log(product)
     shoppingCart.products.push(product)
     customer.shoppingCart.products.push(product)
 

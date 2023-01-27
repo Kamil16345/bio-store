@@ -12,8 +12,19 @@ const cors = require("cors");
 router.options("*", cors());
 router.get("/", cors(),asyncMiddleware(async (req, res, next) => {
     const categories = await Category.find().sort("name");
+    let products=[]
+    for (const [key, value] of Object.entries(categories)) {
+      //console.log("Object.entries(value.products): ")
+      console.log(value)
+      // for(let i=0; i<value.products.length; i++){
+      //   console.log("value.products[i]", i)
+      //   console.log(value.products[i])
+      // }
+    }
+      
     res.send(categories);
-  })
+    }
+  )
 );
 //validateObjectId
 router.get("/:id", cors(), async (req, res) => {

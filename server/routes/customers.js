@@ -36,7 +36,6 @@ router.post('/', cors(), async(req, res)=>{
     })
     const salt =await bcrypt.genSalt(10)
     customer.password = await bcrypt.hash(customer.password, salt)
-    //subdoc.save({ suppressWarning: true })
     customer = await customer.save()
     //shoppingCart = await shoppingCart.save()
     

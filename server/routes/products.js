@@ -12,13 +12,20 @@ router.get('/', cors(), async(req,res)=>{
     res.send(products);
 })
 
+router.get('/:id', async (req, res)=>{
+
+    const product = await Product.findById(req.params.id)
+    if(!product) return res.status(404).send("There is no product with such ID.")
+    res.send(product)
+})
+
 router.post('/', auth, async(req, res)=>{
     const { error } = validateProduct(req.body)
     if(error) return res.status(400).send(error.details[0].message);
     
-    const category = await Category.findOne({name: req.body.category.name}).select('-products')
+    const category = await Category.findOne({name: req.body.category.name})//.select('-products')
     if(!category) return res.status(400).send('Invalid category')
-    console.log(category)
+
     let product = new Product({
         name:req.body.name,
         category:{
@@ -28,17 +35,15 @@ router.post('/', auth, async(req, res)=>{
         numberInStock: req.body.numberInStock,
         price: req.body.price
     })
+
     product = await product.save()
-    res.send(product)
-    //console.log(product)
-})
-router.get('/:id', async (req, res)=>{
-    const product = await Product.findById(req.params.id)
-    
-    if(!product) return res.status(404).send("There is no product with such ID.")
+    category.products.push(product)
+
+    category.save()
 
     res.send(product)
 })
+
 router.put('/:id', async(req,res)=>{
     const { error } = validateProduct(req.body);
     if(error){
@@ -64,7 +69,12 @@ router.put('/:id', async(req,res)=>{
     res.send(product)
 })
 router.delete('/:id', async(req, res)=>{
+    
     const product = await Product.findByIdAndRemove(req.params.id)
+    const category = await Category.
+
+    console.log("category: ")
+    console.log(category)
     if(!product) return res.status(404).send("There is no product with such ID.")
 
     res.send(product)
