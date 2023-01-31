@@ -10,7 +10,8 @@ const ShoppingCart = mongoose.model('shoppingCart', shoppingCartSchema);
 
 function validateShoppingCart(shoppingCart){
     const schema = {
-        productId:Joi.string().required()
+        productId:Joi.string().required(),
+        operation:Joi.string()
     }
     return Joi.validate(shoppingCart, schema)
 }

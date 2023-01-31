@@ -10,7 +10,8 @@ class MaintainShoppingCart{
             method: 'post',
             url:`/api/${customerData.customerId}/shoppingCart`,
             data:{
-                productId: customerData.productId
+                productId: customerData.productId,
+                operation:customerData.operation
             },
             headers: {
                 'Access-Control-Allow-Origin': '*',

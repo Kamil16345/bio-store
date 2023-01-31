@@ -6,7 +6,8 @@ const { Customer } = require('../models/customer');
 const mongoose = require('mongoose')
 const express = require('express');
 const router = express.Router();
-const cors = require("cors")
+const cors = require("cors");
+const { request } = require('express');
 
 router.options('*', cors())
 
@@ -45,24 +46,37 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
     let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)
 
     const productInCart = shoppingCart.products.find(product =>product._id.valueOf()===req.body.productId)
-    console.log("productInCart: ")
-    console.log(productInCart)
-    
+    const operation = req.body.operation
     if(productInCart){
         console.log("We are in if")
         const productInCart = shoppingCart.products.find(product=>product._id.valueOf()===req.body.productId)
-        productInCart.amountInCart++;
+        if(operation==="remove"){
+            productInCart.amountInCart--
+            if(productInCart.amountInCart==0){
+                shoppingCart.updateOne({}, {$pull: {products: {amountInCart: 0}}})
+            }
+        }else{
+            productInCart.amountInCart++
+        }
     }else{
         console.log("We are in else")
-
+        
         shoppingCart.products.push(product)
         customer.shoppingCart.products.push(product)
     }
 
     shoppingCart = await shoppingCart.save();
     customer = await customer.save()
-    
-    product.numberInStock--;
+
+    if(operation==="remove"){
+        console.log("adding +1 numberInStock")
+        console.log(operation)
+        product.numberInStock++
+    }else{
+        console.log("substracting -1 numberInStock")
+        console.log(operation)
+        product.numberInStock--
+    }
     product.save()
 
     res.send(customer)
@@ -102,7 +116,6 @@ router.delete('/:customerId/shoppingCart', async(req, res)=>{
 })
 
 module.exports = router
-
 
 //pobierasz użytkownika
 //pobierasz koszyk

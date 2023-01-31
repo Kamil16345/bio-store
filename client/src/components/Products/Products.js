@@ -6,7 +6,7 @@ import maintainUserShoppingCart from "../../services/maintainUserShoppingCart";
 
 import './Products.css'
 //const navigate = useNavigate();
-
+var customerId = localStorage.getItem("customerId");
 export const Products = ({ productsOfCategory }) => {
   const [products, setProducts] = useState([]);
   const { state } = useLocation();
@@ -82,13 +82,27 @@ export const Products = ({ productsOfCategory }) => {
 };
 
 export const addToCart = (event) => {
-  const customerId = localStorage.getItem("customerId");
   if (customerId) {
     let product = event.target.parentElement;
     let productId = product.getAttribute("id");
     var customerData = {
       productId: productId,
       customerId: customerId,
+      operation: "add"
+    };
+    maintainUserShoppingCart.postProduct(customerData);
+  } else {
+    console.log("You are not logged in.");
+  }
+};
+export const removeFromCart = (event) => {
+  if (customerId) {
+    let product = event.target.parentElement;
+    let productId = product.getAttribute("id");
+    var customerData = {
+      productId: productId,
+      customerId: customerId,
+      operation: "remove"
     };
     maintainUserShoppingCart.postProduct(customerData);
   } else {
