@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema({
         default: 0,
         min:0,
         max:9999
+    },
+    amountInCart:{
+        type: Number,
+        default:0
     }
 });
 const Product = mongoose.model('Product', productSchema);
@@ -34,7 +38,8 @@ function validateProduct(product){
         name: Joi.string().min(2).required(),
         category:Joi.required(),
         numberInStock: Joi.number().min(0).max(255),
-        price: Joi.number().min(0).max(9999).required()
+        price: Joi.number().min(0).max(9999).required(),
+        amountInCart:Joi.number()
     }
     return Joi.validate(product, schema)
 }

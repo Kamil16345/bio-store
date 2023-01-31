@@ -69,9 +69,9 @@ export const Products = ({ productsOfCategory }) => {
         {products.map((product) => (
           <div className="card" key={product.id}>
             {/* <img src="" /> */}
-            <h3 id="productName">{product.name}</h3>
-            <h5 id="productPrice">{product.price} zł</h5>
-            <button id="addToCartButton" onClick={(event) => addToCart(event)}>
+            <h3 id="productName" key={product.name}>{product.name}</h3>
+            <h5 id="productPrice" key={product.price}>{product.price} zł</h5>
+            <button id="addToCartButton" key={product.id} onClick={(event) => addToCart(event)}>
               Add to cart
             </button>
           </div>

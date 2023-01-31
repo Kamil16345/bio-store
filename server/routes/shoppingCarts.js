@@ -23,16 +23,16 @@ router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
     console.log(req.params.customerId)
 
     const customer = await Customer.findById(req.params.customerId)
-    
     if(!customer) return res.status(404).send("There is no customer with such ID.")
-    const shoppingCart = await Customer.findById(req.params.customerId).select('shoppingCart -_id')
+    const shoppingCartId=customer.shoppingCart._id.valueOf()
 
-    console.log(shoppingCart.shoppingCart.products)
+    const shoppingCart = await ShoppingCart.findById(shoppingCartId)
     res.send(shoppingCart);
     
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
+
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -43,10 +43,21 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
     if(!product) return res.status(400).send('Invalid product')
     
     let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)
-    console.log("product: ")
-    console.log(product)
-    shoppingCart.products.push(product)
-    customer.shoppingCart.products.push(product)
+
+    const productInCart = shoppingCart.products.find(product =>product._id.valueOf()===req.body.productId)
+    console.log("productInCart: ")
+    console.log(productInCart)
+    
+    if(productInCart){
+        console.log("We are in if")
+        const productInCart = shoppingCart.products.find(product=>product._id.valueOf()===req.body.productId)
+        productInCart.amountInCart++;
+    }else{
+        console.log("We are in else")
+
+        shoppingCart.products.push(product)
+        customer.shoppingCart.products.push(product)
+    }
 
     shoppingCart = await shoppingCart.save();
     customer = await customer.save()
