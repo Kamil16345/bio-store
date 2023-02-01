@@ -34,6 +34,7 @@ export const Categories = ({ navigation }) => {
     let clickedCategory = event.target;
     let categoryId = clickedCategory.getAttribute("data-category-id");
     let category = await maintainCategories.getCategory(categoryId);
+    localStorage.setItem("categoryId", category)
     console.log("category: ")
     console.log(category)
     navigate(`/${categoryId}`, {

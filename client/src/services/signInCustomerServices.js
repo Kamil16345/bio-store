@@ -3,8 +3,8 @@ class AuthenticateDataService{
     create(data){
         return http.post(`/api/customers`, data)
     }
-    getCustomer(email){
-        return http.get(`/api/customers/${email}`)
+    getCustomer(id){
+        return http.get(`/api/customers/${id}`)
     }
 }
 

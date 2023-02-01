@@ -10,15 +10,15 @@ const cors = require("cors");
 const { User } = require('../models/user');
 
 router.options('*', cors())
-router.get('/', async(req,res)=>{
+router.get('/', cors(), async(req,res)=>{
     const customers = await Customer.find()
-    console.log(customer)
+    console.log(customers)
     res.send(customers);
 })
 router.get('/:email', cors(), async (req, res)=>{
     const customer = await Customer.findOne({email:req.params.email})
     console.log(customer)
-    if(!customer) return res.status(404).send("There is no customer with such ID.")
+    if(!customer) return res.status(404).send("There is no customer with such ID.!!")
 
     res.send(customer)
 })

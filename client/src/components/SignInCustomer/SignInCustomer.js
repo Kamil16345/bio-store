@@ -72,6 +72,7 @@ export const SignInCustomer = () => {
 
         AuthenticateDataService.getCustomer(data.email)
         .then(response => (
+            console.log(response),
             auth.login(email),
             navigate(`/customerPanel/${email}`, {
                 state: {
@@ -80,7 +81,8 @@ export const SignInCustomer = () => {
                     id: response.data._id
                 }
             }),
-            localStorage.setItem("customerId", response.data._id)
+            localStorage.setItem("customerId", response.data._id),
+            localStorage.setItem("customerEmail", response.data.email)
         ))
         .catch(e=> {
             console.log(e)

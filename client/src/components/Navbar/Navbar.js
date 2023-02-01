@@ -7,6 +7,7 @@ export const Navbar = () => {
   const auth = useAuth();
   const customerId = localStorage.getItem("customerId");
   const userId = localStorage.getItem("userId");
+  const categoryId = localStorage.getItem("categoryId");
   return (
     <nav>
       <NavLink to="/">Home</NavLink>
@@ -18,7 +19,10 @@ export const Navbar = () => {
       )}
       {customerId && (
         <>
-          <NavLink to={'customerPanel/'+customerId}>Customer Panel</NavLink>
+          <NavLink to={{
+            pathname: "/customerPanel",
+            search:`?customer=${customerId}`
+          }}>Customer Panel</NavLink>
           <NavLink to="shoppingCart" id="shoppingCart">
             ShoppingCart
           </NavLink>

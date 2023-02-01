@@ -13,6 +13,7 @@ export const ShoppingCart = () => {
     getShoppingCart();
   }, []);
   function getShoppingCart() {
+    console.log("CUSTOMER ID:",customerId)
     MaintainShoppingCart.getShoppingCart(customerId)
       .then((response) => {
         setProducts(response.data.products);

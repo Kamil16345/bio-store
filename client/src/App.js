@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Home/>} />
         <Route path='*' element={<NoMatch/>} />
         <Route path='authCustomer' element={<SignInCustomer/>} />
-        <Route path='customerPanel/:customerId' element={<CustomerPanel/>} />
+        <Route path='customerPanel' element={<CustomerPanel/>} />
         <Route path='/:category' element={<Category />} />
         <Route path='signUp' element={<SignUpCustomer/>} />
         <Route path='shoppingCart' element={<ShoppingCart/>} />

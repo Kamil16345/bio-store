@@ -12,7 +12,7 @@ export const Category = () => {
   return (
     <>
       <Categories />
-      <Products productsOfCategory={products} />
+      {/* <Products productsOfCategory={products} /> */}
     </>
   );
 };
