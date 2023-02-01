@@ -52,8 +52,12 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
         const productInCart = shoppingCart.products.find(product=>product._id.valueOf()===req.body.productId)
         if(operation==="remove"){
             productInCart.amountInCart--
+            console.log("productInCart.amountInCart: ")
+            console.log(productInCart.amountInCart)
             if(productInCart.amountInCart==0){
-                shoppingCart.updateOne({}, {$pull: {products: {amountInCart: 0}}})
+                let updatedProducts = shoppingCart.products.filter(product => product.amountInCart !== 0);
+                shoppingCart.products=updatedProducts
+                
             }
         }else{
             productInCart.amountInCart++

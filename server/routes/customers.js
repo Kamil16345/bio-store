@@ -15,6 +15,13 @@ router.get('/', async(req,res)=>{
     console.log(customer)
     res.send(customers);
 })
+router.get('/:email', cors(), async (req, res)=>{
+    const customer = await Customer.findOne({email:req.params.email})
+    console.log(customer)
+    if(!customer) return res.status(404).send("There is no customer with such ID.")
+
+    res.send(customer)
+})
 
 router.post('/', cors(), async(req, res)=>{
     console.log(req.body)
@@ -44,13 +51,7 @@ router.post('/', cors(), async(req, res)=>{
     res.send(customer)
     return
 })
-router.get('/:email', cors(), async (req, res)=>{
-    const customer = await Customer.findOne({email:req.params.email})
-    console.log(customer)
-    if(!customer) return res.status(404).send("There is no customer with such ID.")
 
-    res.send(customer)
-})
 router.put('/:id', async(req,res)=>{
     const { error } = validateCustomer(req.body);
     if(error){
