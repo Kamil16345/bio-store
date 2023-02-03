@@ -1,0 +1,8 @@
+.categoryButton{
+    margin: 0;
+    border: 0;
+}
+.categoryCard{
+    background-color: transparent;
+    /* box-shadow:none */
+}

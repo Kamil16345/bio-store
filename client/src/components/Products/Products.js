@@ -67,11 +67,11 @@ export const Products = ({ productsOfCategory }) => {
       <h1>Featured Products</h1>
       <div className="products" id="products">
         {products.map((product) => (
-          <div className="card" key={product.id}>
+          <div className="product col-6" key={product.id}>
             {/* <img src="" /> */}
             <h3 id="productName" key={product.name}>{product.name}</h3>
             <h5 id="productPrice" key={product.price}>{product.price} zł</h5>
-            <button id="addToCartButton" key={product.id} onClick={(event) => addToCart(event)}>
+            <button id="addToCartButton"className="col-6" key={product.id} onClick={(event) => addToCart(event)}>
               Add to cart
             </button>
           </div>

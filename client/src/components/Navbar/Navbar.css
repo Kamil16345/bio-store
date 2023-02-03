@@ -1,3 +1,7 @@
-nav{
-    height:7vh;
+#navbar{
+    height:62px;
+    background-color: rgb(49, 167, 69);
 }
+.link {
+    color: white;
+  }

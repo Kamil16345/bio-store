@@ -8,10 +8,15 @@ export const Home = () => {
   const userId = localStorage.userId;
   return (
     <div>
-        <div className="App">
+      <div className="App row">
+        <div className=" products-component col-2">
           <Categories />
-          <Products />
         </div>
+        <div className="categories-component col-10">
+        <Products />
+        </div>
+        
+      </div>
     </div>
   );
 };

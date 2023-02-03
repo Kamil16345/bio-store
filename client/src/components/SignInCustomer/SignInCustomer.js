@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthenticateDataService from "../../services/signInCustomerServices";
 import { useAuth } from "../AuthenticateAdmin/AuthenticateAdmin";
-import './SignInCustomer.css'
+import "./SignInCustomer.css";
 //import { Button } from 'react-bootstrap'
 const submitted = false;
 export const SignInCustomer = () => {
@@ -13,7 +13,8 @@ export const SignInCustomer = () => {
   const auth = useAuth();
   return (
     <div
-      className="signInForm d-flex justify-content-center align-items-center" id="signInForm"
+      className="signInForm d-flex justify-content-center align-items-center"
+      id="signInForm"
     >
       {submitted ? (
         <div>
@@ -21,8 +22,10 @@ export const SignInCustomer = () => {
           <button>Some button</button>
         </div>
       ) : (
-        <div className="form col-3">
-            <div id="signInLabel"><h2>Sign In</h2></div>
+        <div className="form col-xxl-3 col-l-2 col-md-4 col-sm-6">
+          <div id="signInLabel">
+            <h2>Sign In</h2>
+          </div>
           <div className="form-group">
             <input
               type="text"
@@ -82,7 +85,8 @@ export const SignInCustomer = () => {
         (response) => (
           console.log(response),
           auth.login(email),
-          navigate(`/customerPanel/${email}`, {
+        //   navigate(`/customerPanel/${email}`, {
+          navigate(`/`, {
             state: {
               email: response.data.email,
               name: response.data.name,

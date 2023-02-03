@@ -87,18 +87,20 @@ export const ShoppingCart = () => {
   let productsPrice = results.productsPrice;
   return (
     <>
-      <div className="cartProducts" id="cartProducts">
+      <div className="cartProducts col-6" id="cartProducts">
         {products.map((product) => (
-          <div key={product.id}>
+          <div key={product.id} className="">
             <span>{product.name}</span>
             <button
+              className="btn btn-warning"
               id="decreaseAmount"
               onClick={(event) => removeProduct(event)}
             >
               -
-            </button>
+            </button>&nbsp;
             <span id="productAmount">{product.amountInCart}</span>
-            <button
+            &nbsp;<button
+             className="btn btn-success"
               id="increaseAmount"
               onClick={(event) => addOneMoreProduct(event)}
             >
@@ -106,10 +108,10 @@ export const ShoppingCart = () => {
             </button>
           </div>
         ))}
-        <div>
+        <div className="btn btn-primary">
           Summarize ({productsAmount} products): {productsPrice}zł{" "}
-        </div>
-        <button>Proceed to checkout</button>
+        </div><br></br>
+        <button className="btn btn-primary">Proceed to checkout</button>
       </div>
     </>
   );

@@ -1,29 +1,35 @@
 #signInForm {
     height: 93vh;
-
 }
-.form{
-    background-color: rgb(46, 204, 64);
-    padding: 5em 1.2em;
+
+.form {
+    background-color: rgb(49, 167, 69);
+    padding: 7em 1.2em;
     border-radius: 15px;
 }
+
 .form-group {
     padding: .7em 0;
 }
-#email:hover, #password:hover{
+
+#email:hover,
+#password:hover {
     box-shadow: 5px 2.5px 2.5px rgba(128, 128, 128, 0.7);
 }
-#signInLabel{
+
+#signInLabel {
     text-align: center;
     color: white;
 }
-#signInButton{
+
+#signInButton {
     background-color: white;
-    color:rgb(133, 133, 133);
-    font-size:large;
+    color: rgb(133, 133, 133);
+    font-size: large;
     font-weight: 600;
-    border:0;
+    border: 0;
 }
-#signInButton:hover{
-    box-shadow: 5px 2.5px 2.5px rgba(128, 128, 128, 0.7);
+
+#signInButton:hover {
+    box-shadow: 5px 3px 3px rgba(128, 128, 128, 0.7);
 }

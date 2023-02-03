@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import maintainCategories from "../../services/maintainCategories";
+import './Categories.css'
 
 export const Categories = ({ navigation }) => {
   const [categories, setCategories] = useState([]);
@@ -49,11 +50,10 @@ export const Categories = ({ navigation }) => {
 
   return (
     <>
-      <div>Categories</div>
       <div className="categories" id="categories">
         {categories.map((category) => (
           <div className="categoryCard" key={category.id}>
-            <button onClick={(event) => redirectToCategory(event)}>
+            <button className="categoryButton btn btn-info" onClick={(event) => redirectToCategory(event)}>
               {category.name}
             </button>
           </div>
