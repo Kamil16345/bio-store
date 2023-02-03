@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
     },
     amountInCart:{
         type: Number,
-        default:0
+        default:1
     }
 });
 const Product = mongoose.model('Product', productSchema);

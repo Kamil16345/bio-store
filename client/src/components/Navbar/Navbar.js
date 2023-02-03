@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../AuthenticateAdmin/AuthenticateAdmin";
 import maintainProducts from "../../services/maintainProducts";
-
+import './Navbar.css'
 export const Navbar = () => {
   const auth = useAuth();
   const customerId = localStorage.getItem("customerId");

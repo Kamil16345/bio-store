@@ -9,6 +9,7 @@ import {AuthProvider} from "./components/AuthenticateAdmin/AuthenticateAdmin"
 import {Logout} from "./components/Logout/Logout"
 import { ShoppingCart } from './components/ShoppingCart/ShoppingCart'
 import {Category} from './components/Category/Category'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

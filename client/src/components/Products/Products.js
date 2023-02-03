@@ -104,6 +104,7 @@ export const removeFromCart = (event) => {
       customerId: customerId,
       operation: "remove"
     };
+    console.log("Adding/removing item")
     maintainUserShoppingCart.postProduct(customerData);
   } else {
     console.log("You are not logged in.");
