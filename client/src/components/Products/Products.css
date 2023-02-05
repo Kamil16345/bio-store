@@ -1,3 +1,61 @@
 .product{
-  float:left
+  float:left;
+  border: 2px solid white;
+  border-color: rgb(49, 167, 69);
+  border-radius: 10px;
+  margin-left:0;
+  margin-right:2em;
+  margin-bottom:2em;
+  height:25vh;
+  /* background-color: rgb(49, 167, 69); */
+}
+.productsHeader{
+  width: 100%;
+  text-align: center;
+  display:block;
+}
+#productName{
+  width: 100%;
+  text-align: center;
+  margin: 0 auto; 
+}
+#productPrice{
+  text-align: right;
+  margin-right:0.5em;
+}
+#addToCartButton{
+  float:right;
+  margin-right:.5em;
+  position:relative;
+  top: 0%;
+  
+}
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  #productName{
+    font-size:large;
+  }
+  #productPrice{
+    font-size: x-large;
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* your styles here */
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* your styles here */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* your styles here */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /* your styles here */
 }

@@ -64,14 +64,14 @@ export const Products = ({ productsOfCategory }) => {
 
   return (
     <>
-      <h1>Featured Products</h1>
+      <h1 id="productsHeader">Featured Products</h1>
       <div className="products" id="products">
         {products.map((product) => (
-          <div className="product col-6" key={product.id}>
+          <div className="product col-10 col-sm-5 col-md-4 col-lg-3 col-xl-2" key={product.id}>
             {/* <img src="" /> */}
             <h3 id="productName" key={product.name}>{product.name}</h3>
-            <h5 id="productPrice" key={product.price}>{product.price} zł</h5>
-            <button id="addToCartButton"className="col-6" key={product.id} onClick={(event) => addToCart(event)}>
+            <h5 id="productPrice" key={product.price}>Price: {product.price} zł</h5><br></br>
+            <button id="addToCartButton"className="col-5 col-md-6 btn btn-success" key={product.id} onClick={(event) => addToCart(event)}>
               Add to cart
             </button>
           </div>

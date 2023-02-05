@@ -1,7 +1,24 @@
-#navbar{
-    height:62px;
+#navbar {
+    height: 40px;
     background-color: rgb(49, 167, 69);
+    text-decoration: none;
 }
+
 .link {
     color: white;
-  }
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0.5em
+}
+
+.link:hover{
+    font-weight: 700;
+    color:white;
+}
+.logout {
+    float: right;
+}
+
+.shoppingCart {
+    float: right;
+}

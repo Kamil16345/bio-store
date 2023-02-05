@@ -19,14 +19,14 @@ export const Navbar = () => {
       )}
       {customerId && (
         <>
-          <NavLink className="link" to={{
+          <NavLink className="link " to={{
             pathname: "/customerPanel",
             search:`?customer=${customerId}`
           }}>Customer Panel</NavLink>
-          <NavLink className="link" to="shoppingCart" id="shoppingCart">
+          <NavLink className="link shoppingCart" to="shoppingCart" id="shoppingCart">
             ShoppingCart
           </NavLink>
-          <NavLink className="link" to="/logout" id="logoutButton">
+          <NavLink className="link logout" to="/logout" id="logoutButton">
             Logout
           </NavLink>
         </>

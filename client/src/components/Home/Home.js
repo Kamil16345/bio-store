@@ -9,10 +9,10 @@ export const Home = () => {
   return (
     <div>
       <div className="App row">
-        <div className=" products-component col-2">
+        <div className=" categories-component col-2">
           <Categories />
         </div>
-        <div className="categories-component col-10">
+        <div className="products-component col-10">
         <Products />
         </div>
         
