@@ -7,6 +7,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    description:{
+        type: String,
+        required:true
+    },
     category: {
         type: {
             name: String,
@@ -29,17 +33,24 @@ const productSchema = new mongoose.Schema({
     amountInCart:{
         type: Number,
         default:1
+    },
+    image:{
+        type:Buffer,
+        required:false,
+        default: Buffer.from([])
     }
 });
 const Product = mongoose.model('Product', productSchema);
 
 function validateProduct(product){
     const schema = {
-        name: Joi.string().min(2).required(),
+        name: Joi.string().min(2).max(30).required(),
+        description: Joi.string().min(2).max(300).required(),
         category:Joi.required(),
         numberInStock: Joi.number().min(0).max(255),
         price: Joi.number().min(0).max(9999).required(),
-        amountInCart:Joi.number()
+        amountInCart:Joi.number(),
+        // image: Joi.binary()
     }
     return Joi.validate(product, schema)
 }

@@ -1,0 +1,13 @@
+.App{
+    height:100vh
+}
+.categories{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.products-component{
+    /* width:100%;
+    display: flex;
+    justify-content: center; */
+}

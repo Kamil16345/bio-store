@@ -10,23 +10,23 @@ export const Navbar = () => {
   const categoryId = localStorage.getItem("categoryId");
   return (
     <nav id="navbar">
-      <NavLink className="link" to="/">Home</NavLink>
+      <NavLink className="navbarLink" id="homeLink" to="/">Home</NavLink>
       {!customerId && (
         <>
-          <NavLink className="link" to="signUp">Sign Up</NavLink>
-          <NavLink className="link" to="authCustomer">Sign In</NavLink>
+          <NavLink className="navbarLink" to="signUp">Sign Up</NavLink>
+          <NavLink className="navbarLink" to="authCustomer">Sign In</NavLink>
         </>
       )}
       {customerId && (
         <>
-          <NavLink className="link " to={{
+          <NavLink className="navbarLink " to={{
             pathname: "/customerPanel",
             search:`?customer=${customerId}`
           }}>Customer Panel</NavLink>
-          <NavLink className="link shoppingCart" to="shoppingCart" id="shoppingCart">
+          <NavLink className="navbarLink shoppingCart" to="shoppingCart" id="shoppingCart">
             ShoppingCart
           </NavLink>
-          <NavLink className="link logout" to="/logout" id="logoutButton">
+          <NavLink className="navbarLink logout" to="/logout" id="logoutButton">
             Logout
           </NavLink>
         </>

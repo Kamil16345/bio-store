@@ -6,29 +6,37 @@
   margin-left:0;
   margin-right:2em;
   margin-bottom:2em;
-  height:25vh;
-  /* background-color: rgb(49, 167, 69); */
+  height:22em;
 }
+img{
+  max-height:11em;
+  display:block; 
+  margin:1em auto;
+}
+/* #product{
+  position: relative;
+} */
 .productsHeader{
-  width: 100%;
-  text-align: center;
-  display:block;
+  display: flex;
+  justify-content: center;
 }
 #productName{
-  width: 100%;
   text-align: center;
   margin: 0 auto; 
+}
+#description{
+  margin:.5em
 }
 #productPrice{
   text-align: right;
   margin-right:0.5em;
 }
 #addToCartButton{
+  height:2em;
+  padding:.2em;
   float:right;
-  margin-right:.5em;
-  position:relative;
-  top: 0%;
-  
+  margin-right: .5em;
+  top:90%;
 }
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
@@ -36,26 +44,49 @@
     font-size:large;
   }
   #productPrice{
-    font-size: x-large;
+    font-size: medium;
+  }
+  .product{
+    height:20em;
   }
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-  /* your styles here */
+  #productName{
+    font-size:large;
+  }
+  #productPrice{
+    font-size: medium;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-  /* your styles here */
+  #productName{
+    font-size:x-large;
+  }
+  #productPrice{
+    font-size: medium;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
-  /* your styles here */
+  #productName{
+    font-size:x-large;
+  }
+  #productPrice{
+    font-size: medium;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-  /* your styles here */
+  #productName{
+    font-size:large;
+  }
+  #productPrice{
+    font-size: medium;
+  }
 }

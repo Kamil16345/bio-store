@@ -3,14 +3,15 @@
     background-color: rgb(49, 167, 69);
     text-decoration: none;
 }
-
-.link {
+#homeLink{
+    margin-top:100px;
+}
+.navbarLink {
     color: white;
     text-decoration: none;
     font-weight: 600;
-    margin: 0.5em
+    margin: 0.5em;
 }
-
 .link:hover{
     font-weight: 700;
     color:white;
@@ -18,7 +19,6 @@
 .logout {
     float: right;
 }
-
 .shoppingCart {
     float: right;
 }
