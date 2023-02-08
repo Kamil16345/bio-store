@@ -1,0 +1,25 @@
+.signUpComponent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 94vh; 
+}
+.form{
+    /* background-color: white; */
+    
+}
+#signUpLabel{
+    text-align: center;
+    color: white;
+}
+.signUpButton{
+    float: right;
+    background-color: white;
+    color: rgb(133, 133, 133);
+    font-size: large;
+    font-weight: 600;
+    border: 0;
+}
+.form-group{
+    padding: .7em 0;
+}

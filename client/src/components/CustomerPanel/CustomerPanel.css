@@ -1,0 +1,17 @@
+.customerPanel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 94vh;
+}
+.elements{
+    border: 5px solid white;
+    border-color: rgb(49, 167, 69);
+    border-radius: 15px;
+    text-align: center;
+}
+.name, .surname, .email, .phone{
+    margin:2em;
+    text-align: left;
+    font-size: 1.2em;
+}

@@ -33,7 +33,7 @@ router.get('/:customerId/shoppingCart', cors(), async(req,res)=>{
 })
 
 router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
-
+    console.log("We are on server")
     const { error } = validateShoppingCart(req.body)
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -42,6 +42,8 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
 
     let product = await Product.findById(req.body.productId)
     if(!product) return res.status(400).send('Invalid product')
+    console.log("product: ")
+    console.log(product)
     
     let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)
 

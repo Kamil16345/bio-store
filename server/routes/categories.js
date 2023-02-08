@@ -26,7 +26,6 @@ router.get("/", cors(),asyncMiddleware(async (req, res, next) => {
     }
   )
 );
-//validateObjectId
 router.get("/:id", cors(), async (req, res) => {
   let category = await Category.findById(req.params.id);
   if (!category)
@@ -34,7 +33,7 @@ router.get("/:id", cors(), async (req, res) => {
   let products = await Product.find()
     .where("category._id")
     .equals(category)
-    .select("name numberInStock price");
+    .select("name description numberInStock price image");
   console.log(products);
   for (let i = 0; i < products.length; i++) {
     category.products.push(products[i]);

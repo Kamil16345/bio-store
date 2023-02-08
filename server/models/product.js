@@ -49,8 +49,7 @@ function validateProduct(product){
         category:Joi.required(),
         numberInStock: Joi.number().min(0).max(255),
         price: Joi.number().min(0).max(9999).required(),
-        amountInCart:Joi.number(),
-        // image: Joi.binary()
+        amountInCart:Joi.number()
     }
     return Joi.validate(product, schema)
 }

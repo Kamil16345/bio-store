@@ -13,7 +13,7 @@ export const ShoppingCart = () => {
     getShoppingCart();
   }, []);
   function getShoppingCart() {
-    console.log("CUSTOMER ID:",customerId)
+    console.log("CUSTOMER ID:", customerId);
     MaintainShoppingCart.getShoppingCart(customerId)
       .then((response) => {
         setProducts(response.data.products);
@@ -74,44 +74,54 @@ export const ShoppingCart = () => {
       console.log("productsPrice: ");
       productsPrice += products[i].amountInCart * products[i].price;
     }
-    let productsPriceFixed=productsPrice.toFixed(2)
+    let productsPriceFixed = productsPrice.toFixed(2);
     console.log("productsPrice: ");
     console.log(productsPrice);
     return {
-      productsAmount:productsAmount,
-      productsPrice: productsPriceFixed
-    }
+      productsAmount: productsAmount,
+      productsPrice: productsPriceFixed,
+    };
   }
   let results = summarizeCart();
   let productsAmount = results.productsAmount;
   let productsPrice = results.productsPrice;
   return (
     <>
-      <div className="cartProducts col-6" id="cartProducts">
-        {products.map((product) => (
-          <div key={product.id} className="">
-            <span>{product.name}</span>
-            <button
-              className="btn btn-warning"
-              id="decreaseAmount"
-              onClick={(event) => removeProduct(event)}
-            >
-              -
-            </button>&nbsp;
-            <span id="productAmount">{product.amountInCart}</span>
-            &nbsp;<button
-             className="btn btn-success"
-              id="increaseAmount"
-              onClick={(event) => addOneMoreProduct(event)}
-            >
-              +
-            </button>
+      <div className="cartProductsParent">
+        <div className="cartProducts col-6" id="cartProducts">
+          <h3 className="header">Summary</h3>
+          {products.map((product) => (
+            <div key={product.id} className="cartProduct">
+              <span className="productName">{product.name}</span>
+              <button
+                className="btn btn-success"
+                id="increaseAmount"
+                onClick={(event) => addOneMoreProduct(event)}
+              >
+                +
+              </button>
+              &nbsp;
+              <span id="productAmount">{product.amountInCart}</span>
+              &nbsp;
+              <button
+                className="btn btn-warning"
+                id="decreaseAmount"
+                onClick={(event) => removeProduct(event)}
+              >
+                -
+              </button>
+            </div>
+          ))}
+          <div class="summaryDiv bg-success text-white text-center p-2">
+            Summarize ({productsAmount} products): {productsPrice}zł{" "}
           </div>
-        ))}
-        <div className="btn btn-primary">
-          Summarize ({productsAmount} products): {productsPrice}zł{" "}
-        </div><br></br>
-        <button className="btn btn-primary">Proceed to checkout</button>
+          <br></br>
+          <br></br>
+          <br></br>
+          <button className="btn btn-primary proceedButton">
+            Proceed to checkout
+          </button>
+        </div>
       </div>
     </>
   );

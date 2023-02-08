@@ -2,26 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import maintainCustomer from "../../services/maintainCustomer";
 //import AuthenticateDataService from '../services/signInCustomerServices'
-
+import "./CustomerPanel.css";
 export const CustomerPanel = () => {
   const location = useLocation();
   const [customerData, setCustomerData] = useState(null);
 
   useEffect(() => {
-    if(!customerData){
+    if (!customerData) {
       userInfo();
     }
   }, [customerData]);
 
   const queryString = new URLSearchParams(location.search);
   const customerId = queryString.get("customer");
-  const customerEmail=localStorage.getItem("customerEmail")
+  const customerEmail = localStorage.getItem("customerEmail");
   function userInfo() {
     maintainCustomer
       .getCurrentCustomer(customerEmail)
       .then((response) => {
         setCustomerData(response.data);
-        console.log(response.data.isGold)
+        console.log(response.data.isGold);
       })
       .catch((e) => {
         console.log(e);
@@ -31,13 +31,17 @@ export const CustomerPanel = () => {
     <>
       {customerData && (
         <>
-          <p>email: {customerData.email}</p>
-          <p>name: {customerData.name}</p>
-          <p>surname: {customerData.surname}</p>
-          <p>phone: {customerData.phone}</p>
+          <div className="customerPanel">
+            <div className="elements col-4">
+              <h3 className="header">Customer Information</h3>
+              <div className="name">name: <b>{customerData.name}</b></div>
+              <div className="surname">surname: <b>{customerData.surname}</b></div>
+              <div className="email">email: <b>{customerData.email}</b></div>
+              <div className="phone">phone: <b>{customerData.phone}</b></div>
+            </div>
+          </div>
         </>
       )}
     </>
   );
-  
 };

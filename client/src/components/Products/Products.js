@@ -13,6 +13,8 @@ export const Products = ({ productsOfCategory }) => {
   const { state } = useLocation();
   useEffect(() => {
     if (productsOfCategory) {
+      console.log("productsOfCategory: ")
+      console.log(productsOfCategory)
       setProducts(productsOfCategory);
       categoryProducts(productsOfCategory);
     } else {
@@ -32,15 +34,11 @@ export const Products = ({ productsOfCategory }) => {
         setTimeout(() => {
           for (let i = 0; i < response.data.length; i++) {
             children[i].setAttribute("id", response.data[i]._id);
-            children[i].children[0].dataset.productCategory =
-              response.data[i].category.name;
-            // children[i].children[0].dataset.productImageUrl =
-            //   "data:image/jpeg;base64," +
-            //   response.data[i].image.data.toString("base64");
-            console.log(children[i].children[0].dataset.productImageUrl);
+            children[i].children[0].dataset.productCategory = response.data[i].category.name;
+            children[i].children[0].dataset.productName = response.data[i].name;
             children[i].children[0].dataset.productId = response.data[i]._id;
-            children[i].children[1].dataset.productName = response.data[i].name;
-            children[i].children[1].dataset.price = response.data[i].price;
+            children[i].children[2].dataset.description = response.data[i].description
+            children[i].children[3].dataset.price = response.data[i].price;
           }
         }, 20);
       })
@@ -52,19 +50,25 @@ export const Products = ({ productsOfCategory }) => {
     let productsDiv = document.getElementById("products");
     let children = productsDiv.children;
     console.log("productsDiv.length: ");
-    console.log(products);
+    console.log(products.length);
 
     //children - class = "card"
     setTimeout(() => {
       //children[0].children[0].dataset.productCategory =
       console.log("products.parentElement: ");
-      console.log(products.parentElement);
+      console.log(products);
       for (let i = 0; i < children.length; i++) {
-        children[i].setAttribute("id", products[i]._id);
-        productsDiv.children[i].children[0].dataset.productName =
-          products[i].name;
+        // children[i].setAttribute("id", products[i]._id);
+        // productsDiv.children[i].children[0].dataset.productName =
+        //   products[i].name;
 
-        productsDiv.children[i].children[1].dataset.price = products[i].price;
+        // productsDiv.children[i].children[1].dataset.price = products[i].price;
+        children[i].setAttribute("id", products[i]._id);
+        productsDiv.children[i].children[0].dataset.productCategory = products[i].category.name;
+        productsDiv.children[i].children[0].dataset.productName = products[i].name;
+        productsDiv.children[i].children[0].dataset.productId = products[i]._id;
+        productsDiv.children[i].children[2].dataset.description = products[i].description
+        productsDiv.children[i].children[3].dataset.price = products[i].price;
       }
     }, 20);
   }
@@ -111,6 +115,7 @@ export const addToCart = (event) => {
   if (customerId) {
     let product = event.target.parentElement;
     let productId = product.getAttribute("id");
+    console.log("We are adding product")
     var customerData = {
       productId: productId,
       customerId: customerId,

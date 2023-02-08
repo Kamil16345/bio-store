@@ -42,6 +42,8 @@ export const Categories = ({ navigation }) => {
       state: {
         id: category.data._id,
         name: category.data.name,
+        description:category.data.description,
+        image: category.data.image,
         products: category.data.products,
       },
     });
@@ -53,7 +55,7 @@ export const Categories = ({ navigation }) => {
       <div className="categories" id="categories">
         {categories.map((category) => (
           <div className="categoryCard" key={category.id}>
-            <button className="categoryButton btn btn-info col-10" onClick={(event) => redirectToCategory(event)}>
+            <button className="categoryButton btn btn-info col-12" onClick={(event) => redirectToCategory(event)}>
               {category.name}
             </button>
           </div>
