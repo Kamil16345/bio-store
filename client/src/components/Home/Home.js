@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Home.css"
+import "./Home.css";
 import { Categories } from "../Categories/Categories";
 import { Products } from "../Products/Products";
 
@@ -14,9 +14,8 @@ export const Home = () => {
           <Categories />
         </div>
         <div className="products-component col-10">
-        <Products />
+          <Products />
         </div>
-        
       </div>
     </div>
   );

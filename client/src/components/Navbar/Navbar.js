@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../AuthenticateAdmin/AuthenticateAdmin";
 import maintainProducts from "../../services/maintainProducts";
-import './Navbar.css'
+import "./Navbar.css";
 export const Navbar = () => {
   const auth = useAuth();
   const customerId = localStorage.getItem("customerId");
@@ -10,24 +10,39 @@ export const Navbar = () => {
   const categoryId = localStorage.getItem("categoryId");
   return (
     <nav id="navbar">
-      <NavLink className="navbarLink" id="homeLink" to="/">Home</NavLink>
+      <NavLink className="navbarLink" id="homeLink" to="/">
+        Home
+      </NavLink>
       {!customerId && (
         <>
-          <NavLink className="navbarLink" to="signUp">Sign Up</NavLink>
-          <NavLink className="navbarLink" to="authCustomer">Sign In</NavLink>
+          <NavLink className="navbarLink" to="signUp">
+            Sign Up
+          </NavLink>
+          <NavLink className="navbarLink" to="authCustomer">
+            Sign In
+          </NavLink>
         </>
       )}
       {customerId && (
         <>
-          <NavLink className="navbarLink " to={{
-            pathname: "/customerPanel",
-            search:`?customer=${customerId}`
-          }}>Customer Panel</NavLink>
-          <NavLink className="navbarLink shoppingCart" to="shoppingCart" id="shoppingCart">
-            ShoppingCart
+          <NavLink
+            className="navbarLink"
+            to={{
+              pathname: "/customerPanel",
+              search: `?customer=${customerId}`,
+            }}
+          >
+            Customer Panel
           </NavLink>
           <NavLink className="navbarLink logout" to="/logout" id="logoutButton">
             Logout
+          </NavLink>
+          <NavLink
+            className="navbarLink shoppingCart"
+            to="shoppingCart"
+            id="shoppingCart"
+          >
+            ShoppingCart
           </NavLink>
         </>
       )}

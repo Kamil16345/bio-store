@@ -70,12 +70,12 @@ export const Products = ({ productsOfCategory }) => {
   }
   // const base64Image = Buffer.from(product.image.data).toString('base64');
   return (
-    <>
+    <div id="productsRoot">
       <h1 id="productsHeader">Featured Products</h1>
       <div className="products" id="products">
         {products.map((product) => (
           <div
-            className="product col-10 col-sm-5 col-md-4 col-lg-3 col-xl-3"
+            className="product col-10 col-sm-6 col-md-5 col-lg-4 col-xl-3"
             id="product"
             key={product.id}
           >
@@ -90,9 +90,8 @@ export const Products = ({ productsOfCategory }) => {
             />
             <h6 id="description" key={product.description}>{product.description}</h6>
             <h5 id="productPrice" key={product.price}>
-              Price: {product.price} zł
+              Price: <b>{product.price}zł</b> 
             </h5>
-            <br></br>
             <button
               id="addToCartButton"
               className="col-5 col-md-6 btn btn-success"
@@ -104,7 +103,7 @@ export const Products = ({ productsOfCategory }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

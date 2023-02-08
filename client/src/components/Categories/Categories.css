@@ -1,3 +1,15 @@
+.categories{
+    margin-top:1em;
+}
 .categoryCard{
-    padding: 0.1em
+    padding: 0.35em;
+}
+.categoryButton.btn{
+    color: white;
+    font-size: larger;
+    font-weight: 600;
+}
+.categoryButton.btn:hover{
+    box-shadow: 5px 2.5px 2.5px rgba(38, 208, 242, 0.5);
+    color:white;
 }

@@ -6,11 +6,15 @@
 #homeLink{
     margin-top:100px;
 }
-.navbarLink {
+
+a.navbarLink{
     color: white;
     text-decoration: none;
     font-weight: 600;
-    margin: 0.5em;
+    margin: .5em;
+}
+.navbarLink:hover{
+    color:whitesmoke
 }
 .link:hover{
     font-weight: 700;

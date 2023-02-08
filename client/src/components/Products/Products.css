@@ -1,21 +1,29 @@
+#productsRoot{
+  text-align: center;
+}
+#products{
+  text-align: center;
+}
 .product{
-  float:left;
   border: 2px solid white;
   border-color: rgb(49, 167, 69);
   border-radius: 10px;
   margin-left:0;
   margin-right:2em;
   margin-bottom:2em;
-  height:22em;
+  height:27em;
+  display:block; 
+  margin:1em auto;
+  position: relative;
+}
+.product:hover{
+  box-shadow: 5px 2.5px 2.5px rgba(128, 128, 128, 0.7);
 }
 img{
   max-height:11em;
   display:block; 
   margin:1em auto;
 }
-/* #product{
-  position: relative;
-} */
 .productsHeader{
   display: flex;
   justify-content: center;
@@ -29,14 +37,17 @@ img{
 }
 #productPrice{
   text-align: right;
-  margin-right:0.5em;
+  float:right;
+  margin-right: 0.5em;
 }
 #addToCartButton{
-  height:2em;
+  height:2.2em;
   padding:.2em;
   float:right;
-  margin-right: .5em;
+  position: absolute;
   top:90%;
+  left:48%
+  /* top:95%; */
 }
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) {
@@ -46,15 +57,25 @@ img{
   #productPrice{
     font-size: medium;
   }
-  .product{
-    height:20em;
+  .products-component{
+    display: flex;
+    justify-content: center;
   }
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
+  .product{
+    float:left;
+    margin:.7em;
+  }
   #productName{
     font-size:large;
+  }
+  .products-component{
+    display: flex;
+    justify-content: center;
   }
   #productPrice{
     font-size: medium;
@@ -63,6 +84,10 @@ img{
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
+  .product{
+    float:left;
+    margin:.7em;
+  }
   #productName{
     font-size:x-large;
   }
@@ -73,6 +98,10 @@ img{
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
+  .product{
+    float:left;
+    margin:.7em;
+  }
   #productName{
     font-size:x-large;
   }
@@ -83,10 +112,14 @@ img{
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+  .product{
+    float:left;
+    margin:.7em;
+  }
   #productName{
     font-size:large;
   }
   #productPrice{
-    font-size: medium;
+    font-size: large;
   }
 }
