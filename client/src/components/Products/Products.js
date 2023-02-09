@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Buffer } from "buffer";
 
@@ -21,6 +21,7 @@ export const Products = ({ productsOfCategory }) => {
       homePageProducts();
       console.log(products);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   function homePageProducts() {

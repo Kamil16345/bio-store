@@ -11,6 +11,7 @@ export const ShoppingCart = () => {
 
   useEffect(() => {
     getShoppingCart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   function getShoppingCart() {
     console.log("CUSTOMER ID:", customerId);

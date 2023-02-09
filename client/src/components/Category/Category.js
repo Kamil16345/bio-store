@@ -7,7 +7,6 @@ export const Category = () => {
   const { state } = useLocation();
   const products = state.products;
 
-
   return (
     <>
       <div className="App row">

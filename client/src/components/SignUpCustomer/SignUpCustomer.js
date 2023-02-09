@@ -122,6 +122,7 @@ export const SignUpCustomer = () => {
     SignUpCustomerServices.create(data)
       .then(
         (response) => (
+          // eslint-disable-next-line no-sequences
           auth.login(email),
           navigate(`/customerPanel/${email}`, {
             state: {

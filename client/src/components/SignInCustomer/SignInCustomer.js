@@ -7,7 +7,7 @@ import "./SignInCustomer.css";
 const submitted = false;
 export const SignInCustomer = () => {
   const [email, setEmail] = useState("");
-  const [id, setId] = useState("");
+  const [id] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const auth = useAuth();
@@ -83,6 +83,7 @@ export const SignInCustomer = () => {
     AuthenticateDataService.getCustomer(data.email)
       .then(
         (response) => (
+          // eslint-disable-next-line no-sequences
           console.log(response),
           auth.login(email),
         //   navigate(`/customerPanel/${email}`, {
