@@ -1,0 +1,12 @@
+# Port that the application will listen on
+port = 3000
+
+# Database connection settings
+[database]
+host = "localhost"
+port = 27017
+name = "bio-store"
+
+# Other configuration options
+[other]
+logLevel = "debug"
