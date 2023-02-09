@@ -42,8 +42,6 @@ export const Categories = ({ navigation }) => {
       state: {
         id: category.data._id,
         name: category.data.name,
-        description:category.data.description,
-        image: category.data.image,
         products: category.data.products,
       },
     });

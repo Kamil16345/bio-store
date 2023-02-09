@@ -21,6 +21,7 @@ app.get('/',(req, res)=>{
 })
 
 const port = process.env.PORT || 3000
+const ci = process.env.CI = false
 
 const server = app.listen(port, ()=>console.log(`App is starting on port: ${port}`))
 

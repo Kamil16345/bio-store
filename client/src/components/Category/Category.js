@@ -7,12 +7,18 @@ export const Category = () => {
   const { state } = useLocation();
   const products = state.products;
 
-  const [data, setData] = useState()
-  useEffect(setData)
+  const [data, setData] = useState();
+  useEffect(setData);
   return (
     <>
-      <Categories />
-      <Products productsOfCategory={products} />
+      <div className="App row">
+        <div className="categories-component col-2">
+          <Categories />
+        </div>
+        <div className="products-component col-10">
+          <Products productsOfCategory={products} />
+        </div>
+      </div>
     </>
   );
 };

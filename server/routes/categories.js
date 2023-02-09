@@ -30,6 +30,8 @@ router.get("/:id", cors(), async (req, res) => {
   let category = await Category.findById(req.params.id);
   if (!category)
     return res.status(404).send("There is no category with such ID.");
+  console.log("category:")
+  console.log(category)
   let products = await Product.find()
     .where("category._id")
     .equals(category)

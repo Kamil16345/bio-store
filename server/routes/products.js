@@ -23,22 +23,22 @@ router.get("/:id", async (req, res) => {
   res.send(product);
 });
 
-router.post("/63e263737264b33ab32e597e/image", upload.single("file"), async (req, res) => {
-  const product = await Product.findById("63e263737264b33ab32e597e");
-  console.log(product)
-  if (!product)
-    return res.status(404).send("There is no product with such ID.");
+router.post("/:product/image", upload.single("file"), async (req, res) => {
+  const product = await Product.findById(req.params.product);
+  if (!product) {return res.status(404).send("There is no product with such ID.");}
+  
+  const category = await Category.findById(product.category._id)
+  if (!category) {return res.status(404).send("There is no category with such ID.");}
+
   const image = req.file.buffer;
-  console.log("image: ");
-  console.log(image);
 
   product.image = image;
-
-  console.log("product.image: ");
-  console.log(product.image);
+  const productInCategory = category.products.find(pc=>pc._id.valueOf()===product._id.valueOf())
+  productInCategory.image=image;
 
   product.save();
-  console.log(product);
+  category.save();
+
   res.send(product);
 });
 
