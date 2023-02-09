@@ -23,7 +23,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --verbose",
-    "start":"node index.js"
+    "build": "babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
