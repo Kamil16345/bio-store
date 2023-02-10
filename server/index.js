@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const winston = require('winston')
+
 require('dotenv').config();
 require('./startup/logging')()
 require('./startup/routes')(app)
@@ -20,6 +22,9 @@ app.use(cors(corsOptions))
 app.get('/',(req, res)=>{
     res.send('Hello world')
 })
+winston.add(winston.transports.MongoDB, {
+    tryReconnect: true
+});
 
 const port = process.env.PORT || 3000
 
