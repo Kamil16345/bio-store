@@ -16,6 +16,8 @@
     "mongoose": "^6.7.3",
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2",
+    "netlify-lambda": "^2.0.15",
+    "serverless-http": "^3.1.1",
     "winston": "^3.8.2",
     "winston-mongodb": "^5.1.0"
   },
@@ -23,8 +25,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose",
-    "build": "node index.js"
+    "test": "jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
