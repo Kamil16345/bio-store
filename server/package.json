@@ -25,7 +25,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose",
+    "build":"node functions/api.js"
   },
   "repository": {
     "type": "git",
