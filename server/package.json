@@ -2,7 +2,7 @@
   "dependencies": {
     "babel": "^6.23.0",
     "bcrypt": "^5.1.0",
-    "config": "^3.3.8",
+    "config": "^3.3.9",
     "cors": "^2.8.5",
     "csurf": "^1.11.0",
     "dotenv": "^16.0.3",
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/Kamil16345/bio-store#readme",
   "description": "",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "jest": "^29.3.1",
     "supertest": "^6.3.3"
   }
