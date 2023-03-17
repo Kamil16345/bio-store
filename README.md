@@ -1,33 +1,37 @@
-#Wlcome to my bio-store app. My e-commerce app.
+# Welcome to bio-store app. My e-commerce app.  
 
+### Application is still in development process, for now available locally.  
+The purpose of this project is to build fully maintainable application where user can create account, move desired products to shopping cart, watch summary of order and make an order. In payment process I want to include external API e.g. przelewy24.  
 
-Application is still in development process, for now available locally.
-The purpose of this project is to build fully maintainable application where user can create account, move desired products to shopping cart, watch summary of order and make an order. In payment process I want to include external API e.g. przelewy24. 
+### For now application is half finished, but to sum up I'll list implemented functionalities and features that I want to itroduce  
+# Done so far:  
+☑️ API for creating/maintaining customers and users  
+☑️ API for products with dividing them into categories  
+☑️ UI for created functionalities, placed on screen below  
+☑️ Logic for maintaining customer shopping cart  
+☑️ Basic authentication  
+☑️ Connection with MongoDB and storing data  
 
-For now application is half finished, but to sum up I'll list implemented functionalities and features that I want to itroduce
-Done so far: 
-[x] API for creating/maintaining customers and users
-[x] API for products with dividing them into categories
-[x] UI for created functionalities, placed on screen below
-[x] Logic for maintaining customer shopping cart
-[x] Basic authentication 
-[x] Connection with MongoDB and storing data
+# To do / to improve:  
+- [x] Authorization (want to divide users to customers and maintainers)  
+- [x] Better handling errors  
+- [x] Provide UI for maintainer (move action with creating products from postman to UI)  
+- [x] Integrate payments with external API (przelewy24)  
+- [x] Write tests for application  
+- [x] Deploy  
 
-To do / to improve: 
-[ ] Authorization (want to divide users to customers and maintainers)
-[ ] Better handling errors
-[ ] Provide UI for maintainer (move action with creating products from postman to UI)
-[ ] Integrate payments with external API (przelewy24)
-[ ] Write tests for application
-[ ] Deploy
+# Tech stack:  
+Application is basically based on MERN(Mongo,Express,React,Node) stack, however I used some additional tools, like  
+* Moongoose  
+* Axios  
+* Bootstrap  
 
-Tech stack: 
-Application is basically based on MERN(Mongo,Express,React,Node) stack, however I used some additional tools, like 
-* Moongoose
-* Axios
-* Bootstrap
+Of course as I mentioned you can download this app and run it locally. When you dowload this repository, run following commands:  
+npm install (both in server and client directory)
+When you install dependencies, in server directory run node index.js
+In client directory: npm start
 
-To do this, download this repository and run commands: 
+To do this, download this repository and run commands:  
 
 
 # Getting Started with Create React App
