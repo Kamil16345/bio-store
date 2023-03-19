@@ -1,15 +1,16 @@
-import React from "react";
+import {React, useState } from "react";
 import { NavLink } from "react-router-dom";
 //import { useAuth } from "../AuthenticateAdmin/AuthenticateAdmin";
 //import maintainProducts from "../../services/maintainProducts";
 import "./Navbar.css";
 export const Navbar = () => {
   //const auth = useAuth();
+  const [navbar, updateNavbar] = useState(0);
   const customerId = localStorage.getItem("customerId");
   const userId = localStorage.getItem("userId");
   //const categoryId = localStorage.getItem("categoryId");
   return (
-    <nav id="navbar">
+    <nav id="navbar" onClick={updateNavbar}>
       <NavLink className="navbarLink" id="homeLink" to="/">
         Home
       </NavLink>

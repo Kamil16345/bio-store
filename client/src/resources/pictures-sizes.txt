@@ -1,0 +1,2 @@
+pionowe: 200x250
+poziome: 200x130

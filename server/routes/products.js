@@ -30,11 +30,10 @@ router.post("/:product/image", upload.single("file"), async (req, res) => {
   const category = await Category.findById(product.category._id)
   if (!category) {return res.status(404).send("There is no category with such ID.");}
 
-  const image = req.file.buffer;
+  product.image = req.file.buffer;
 
-  product.image = image;
   const productInCategory = category.products.find(pc=>pc._id.valueOf()===product._id.valueOf())
-  productInCategory.image=image;
+  productInCategory.image=product.image;
 
   product.save();
   category.save();
@@ -48,7 +47,6 @@ router.post("/", auth, async (req, res) => {
 
   const category = await Category.findOne({ name: req.body.category.name }); //.select('-products')
   if (!category) return res.status(400).send("Invalid category");
-
   let product = new Product({
     name: req.body.name,
     description: req.body.description,

@@ -82,7 +82,8 @@ export const SignUpCustomer = () => {
 
           <button
             onClick={() => saveCustomer()}
-            className="signUpButton btn btn-success"
+            className="signUpButton btn btn-primary"
+            id="signUpButton"
           >
             Sign Up
           </button>
@@ -124,7 +125,8 @@ export const SignUpCustomer = () => {
         (response) => (
           // eslint-disable-next-line no-sequences
           auth.login(email),
-          navigate(`/customerPanel/${email}`, {
+          //navigate(`/customerPanel/${email}`, {
+          navigate('/', {
             state: {
               email: response.data.email,
               name: response.data.name,

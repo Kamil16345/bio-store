@@ -42,7 +42,7 @@ router.post('/:customerId/shoppingCart', cors(), async(req, res)=>{
 
     let product = await Product.findById(req.body.productId)
     if(!product) return res.status(400).send('Invalid product')
-    console.log("product: ")
+    //console.log("product: ")
     console.log(product)
     
     let shoppingCart = await ShoppingCart.findById(customer.shoppingCart._id)

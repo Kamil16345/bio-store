@@ -1,3 +1,6 @@
+const path = require('path');
+process.env.NODE_CONFIG_DIR='./config'
+
 const jwt = require('jsonwebtoken')
 const config = require('config')
 

@@ -4,15 +4,11 @@
     justify-content: center;
     height: 94vh; 
 }
-.form{
-    /* background-color: white; */
-    
-}
 #signUpLabel{
     text-align: center;
     color: white;
 }
-.signUpButton{
+#signUpButton{
     float: right;
     background-color: white;
     color: rgb(133, 133, 133);
@@ -23,3 +19,8 @@
 .form-group{
     padding: .7em 0;
 }
+@media (max-height: 700px) {
+    .form{
+        height: 85vh; 
+    }
+  }

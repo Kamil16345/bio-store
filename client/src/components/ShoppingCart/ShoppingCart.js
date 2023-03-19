@@ -89,8 +89,9 @@ export const ShoppingCart = () => {
   return (
     <>
       <div className="cartProductsParent">
+      
         <div className="cartProducts col-6" id="cartProducts">
-          <h3 className="header">Summary</h3>
+        <h3 className="header">Summary</h3>
           {products.map((product) => (
             <div key={product.id} className="cartProduct">
               <span className="productName">{product.name}</span>

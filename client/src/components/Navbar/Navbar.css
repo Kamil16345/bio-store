@@ -1,5 +1,5 @@
 #navbar {
-    height: 40px;
+    height: 4vh;
     background-color: rgb(49, 167, 69);
     text-decoration: none;
 }
@@ -11,7 +11,7 @@ a.navbarLink{
     color: white;
     text-decoration: none;
     font-weight: 600;
-    margin: .5em;
+    margin: 0 .5em 0 .5em;
 }
 .navbarLink:hover{
     color:whitesmoke

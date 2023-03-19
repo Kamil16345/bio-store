@@ -5,7 +5,7 @@ import { useAuth } from "../AuthenticateAdmin/AuthenticateAdmin";
 import "./SignInCustomer.css";
 //import { Button } from 'react-bootstrap'
 const submitted = false;
-export const SignInCustomer = () => {
+export const SignInCustomer=() =>{
   const [email, setEmail] = useState("");
   const [id] = useState("");
   const [password, setPassword] = useState("");
@@ -53,8 +53,10 @@ export const SignInCustomer = () => {
           </div>
           <div className="float-end">
             <button
-              onClick={() => saveCustomer()}
-              className="btn btn-primary "
+              onClick={() => {
+                saveCustomer();
+              }} 
+              className="btn btn-primary"
               id="signInButton"
             >
               Sign In
