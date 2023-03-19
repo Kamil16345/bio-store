@@ -44,5 +44,13 @@ Authentication: https://documenter.getpostman.com/view/25265864/2s93JzMg56
 Product-images: https://documenter.getpostman.com/view/25265864/2s93JzMg9U  
 Users: https://documenter.getpostman.com/view/25265864/2s93JzMg9W  
 
-## Main dashboard :<br/>
-![Index page: ](https://github.com/Kamil16345/TODOapp/blob/main/screenshots/1.png)
+## Main dashboard:<br/>
+![Index page: ](https://github.com/Kamil16345/bio-store/blob/master/client/src/resources/screenshots/1.png)
+## Selected category:<br/>
+![Index page: ](https://github.com/Kamil16345/bio-store/blob/master/client/src/resources/screenshots/2.png)
+## Shopping cart:<br/>
+![Index page: ](https://github.com/Kamil16345/bio-store/blob/master/client/src/resources/screenshots/3.png)
+## Sign up page:<br/>
+![Index page: ](https://github.com/Kamil16345/bio-store/blob/master/client/src/resources/screenshots/4.png)
+## Sign in page:<br/>
+![Index page: ](https://github.com/Kamil16345/bio-store/blob/master/client/src/resources/screenshots/5.png)
